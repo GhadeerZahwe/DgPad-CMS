@@ -1,0 +1,65 @@
+﻿
+@model IEnumerable<Term>
+
+@{
+    ViewData["Title"] = "Terms";
+}
+
+<h1>Terms</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+              Name
+            </th>
+      
+            <th>
+              Taxonomy
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @item.Name
+            </td>
+         
+            <td>
+                @item.Taxonomy.Name
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                   
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $("table#terms tbody").sortable({
+            items: "tr:not(.home)",
+            placeholder: "ui-state-highlight",
+            update: function () {
+                let ids = $("table#terms tbody").sortable("serialize");
+                let url = "/admin/terms/reorder";
+
+                $.post(url, ids, function () { });
+            }
+        })
+    </script>
+}
+
+<div class="d-flex w-100 justify-content-center">
+    <pagination page-count="@ViewBag.TotalPages" page-target="/admin/term" page-number="@ViewBag.PageNumber" page-range="@ViewBag.PageRange"></pagination>
+</div>

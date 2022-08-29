@@ -1,0 +1,21 @@
+﻿@model Role
+
+<form action="Roles/addRole" method="post">
+
+    <p>Add Role Name: </p>
+    <input class="form-control" id="roleName" name="roleName" />
+    <br />
+    <input type="submit"  class="btn btn-success" /> 
+   
+    <div class="containes">
+        
+             <tr>
+                 <br />
+                 <td>  <a asp-controller="Roles" type="button" asp-action="roles" class="btn btn-secondary" >View Roles</a> </td>
+                  
+                
+             </tr>
+    </div>
+   
+</form>
+
