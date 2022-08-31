@@ -9,20 +9,14 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-borderless table-striped table-earning">
     <thead>
         <tr>
            
             <th>
                Title
             </th>
-         
-            <th>
-               Date
-            </th>
-            <th>
-                Detail
-            </th>
+      
             <th>
              Summary
             </th>
@@ -42,14 +36,10 @@
             <td>
                 @item.Title
             </td>
+    
             <td>
-                @item.Date
-            </td>
-            <td>
-                @item.Detail
-            </td>
-            <td>
-                @item.Summary
+             
+                 @Html.Raw(item.Summary)
             </td>
             <td>
             <img src="~/media/posts/@item.Image" width="100" alt="" />
@@ -58,9 +48,12 @@
                 @item.PostType.Title
             </td>
             <td>
-                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+              <center>
+         
+                 <a asp-action="Edit" asp-route-id="@item.Id" >Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" >Details</a> |
+                    <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id" >Delete</a>
+            </center>
             </td>
         </tr>
 }

@@ -59,7 +59,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             {
                 term.Code = term.Name.ToLower().Replace(" ", "-");
 
-                var code = await context.PostType.FirstOrDefaultAsync(x => x.Code == term.Code);
+                var code = await context.Terms.FirstOrDefaultAsync(x => x.Code == term.Code);
                 if (code != null)
                 {
                     ModelState.AddModelError("", "The term already exists.");
@@ -112,18 +112,20 @@ namespace dgPadCms.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id, Term term)
         {
             ViewBag.TaxonomyId = new SelectList(context.Taxonomies.OrderBy(x => x.Sorting), "Id", "Name", term.TaxonomyId);
+          
 
             if (ModelState.IsValid)
             {
                 term.Code = term.Name.ToLower().Replace(" ", "-");
 
-                var code = await context.PostType.Where(x => x.Id != id).FirstOrDefaultAsync(x => x.Code == term.Code);
+                var code = await context.Terms.Where(x => x.Id != id).FirstOrDefaultAsync(x => x.Code == term.Code);
                 if (code != null)
                 {
                     ModelState.AddModelError("", "The term already exists.");
                     return View(term);
                 }
-
+                context.Update(term);
+                await context.SaveChangesAsync();
                 TempData["Success"] = "The term has been edited!";
 
                 return RedirectToAction("Index");

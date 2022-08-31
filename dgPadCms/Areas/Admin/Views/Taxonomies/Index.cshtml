@@ -9,17 +9,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table sorting" id="taxonomies">
+<table class="table sorting table table-borderless table-striped table-earning" id="taxonomies">
     <thead>
         <tr>
          
             <th>
                 Name
             </th>
-            <th>
+        @*    <th>
                  Code
             </th>
-         
+         *@
             
             <th></th>
         </tr>
@@ -31,13 +31,19 @@
             <td>
                    @item.Name
             </td> 
-            <td>
+         @*   <td>
                    @item.Code
-            </td>
+            </td>*@
     
             <td>
-                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                 <center>
+                <a asp-action="Edit" asp-route-id="@item.Id" >Edit</a> |
+
+                  <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id" >Delete</a>
+                      <center>
+      
+            </center>
+            </center>
             </td>
         </tr>
 }

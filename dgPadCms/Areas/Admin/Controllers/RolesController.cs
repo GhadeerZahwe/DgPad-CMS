@@ -9,11 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace dgPadCms.Controllers
+namespace dgPadCms.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-  
+    [Area("Admin")]
     public class RolesController : Controller
     {
         private readonly ILogger<RolesController> _logger;

@@ -12,6 +12,7 @@ namespace dgPadCms.Areas.Admin.Controllers
 {
    
      [Authorize(Roles = "Admin")]
+    [Area("Admin")]
     public class PostTypesController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -123,12 +124,13 @@ namespace dgPadCms.Areas.Admin.Controllers
                     ModelState.AddModelError("", "The posttype already exists.");
                     return View(posttype);
                 }
-               
+                 context.Update(posttype);
+            await context.SaveChangesAsync();
                 TempData["Success"] = "The post type has been edited!";
 
                 return RedirectToAction("Index");
             }
-
+          
             return View(posttype);
         }
 

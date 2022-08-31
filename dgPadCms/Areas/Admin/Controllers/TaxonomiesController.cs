@@ -91,7 +91,7 @@ namespace dgPadCms.Areas.Admin.Controllers
 
                 TempData["Success"] = "The taxonomy has been edited!";
 
-                return RedirectToAction("Edit", new { id });
+                return RedirectToAction("Index", new { id });
             }
 
             return View(taxonomy);

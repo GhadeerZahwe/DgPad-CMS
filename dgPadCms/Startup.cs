@@ -71,7 +71,7 @@ namespace dgPadCms
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                   "posttypes",
+                          "posttypes",
                    "{code?}",
                    defaults: new { controller = "PostTypes", action = "PostType" }
                );
@@ -83,7 +83,7 @@ namespace dgPadCms
 
                 endpoints.MapControllerRoute(
                    name: "areas",
-                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                   pattern: "{area:exists}/{controller=Default}/{action=Index}/{id?}"
                );
                 endpoints.MapControllerRoute(
                     name: "default",
@@ -91,7 +91,7 @@ namespace dgPadCms
 
                 endpoints.MapControllerRoute(
                     name: "Rolesdefault",
-                    pattern: "{controller=Roles}/{action=UserRoles}/{userid?}/{rolename?}");
+                    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{userid?}/{rolename?}");
                 endpoints.MapRazorPages();
             });
         }

@@ -4,54 +4,60 @@
     ViewData["Title"] = "Post Details";
 }
 
-<h1>Post Details</h1>
+<div class="row ">
+<div class="col-md-10 au-card recent-report">
+<h2>Posts Details</h2>
+ </div>
+ </div>
+<div>
+ 
 
 <div>
   
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl class="col-md-10 au-card recent-report">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Id)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Id)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Code)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Code)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Date)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Date)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Detail)
         </dt>
         <dd class = "col-sm-10">
              @Html.Raw(Model.Detail)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Summary)
         </dt>
         <dd class = "col-sm-10">
               @Html.Raw(Model.Summary)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Image)
         </dt>
         <dd class = "col-sm-10">
             <img src="~/media/posts/@Model.Image" width="200" alt="" />
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.PostTypeId)
         </dt>
         <dd class = "col-sm-10">
