@@ -1646,6 +1646,9 @@ section {
 .navbar-sidebar .navbar__list li a:hover {
     color: #4272d7;
 }
+    .navbar-sidebar .navbar__list li button:hover {
+        color: #4272d7;
+    }
 
 .navbar-sidebar .navbar__list li.active > a {
     color: #4272d7;

@@ -23,6 +23,8 @@
     <Compile Remove="Data\Migrations\20220901123122_Postterms.Designer.cs" />
     <Compile Remove="Data\Migrations\20220901124031_Postterm.cs" />
     <Compile Remove="Data\Migrations\20220901124031_Postterm.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220901215316_Postssss.cs" />
+    <Compile Remove="Data\Migrations\20220901215316_Postssss.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
