@@ -32,12 +32,10 @@ namespace dgPadCms.Areas.Admin.Controllers
             var posts = context.Posts.OrderByDescending(x => x.Id)
                                             .Include(x => x.PostType)
                                             .Skip((p - 1) * pageSize)
-                                            .Take(pageSize);
-
+                                            .Take(pageSize); 
             ViewBag.PageNumber = p;
             ViewBag.PageRange = pageSize;
             ViewBag.TotalPages = (int)Math.Ceiling((decimal)context.Posts.Count() / pageSize);
-
             return View(await posts.ToListAsync());
         }
 
@@ -46,7 +44,6 @@ namespace dgPadCms.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
-
             return View();
         }
 
