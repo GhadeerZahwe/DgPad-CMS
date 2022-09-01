@@ -49,8 +49,20 @@
                     <option value="0">Choose a PostType</option>
                 </select>
                 <span asp-validation-for="PostTypeId" class="text-danger"></span>
-            </div>
-
+            </div>    
+   
+    @*         @foreach (var term in Model.PostTerms)
+            {
+                <li>
+                    <input type="checkbox" 
+                    name="SelectedGroups" 
+                    value="@Term" id="@term"
+                           @{if (Model.SelectedGroups.Contains(g.ID)) 
+                           { <text> checked='checked' </text>  } } />
+                    <label for="@g.ID">@g.Name</label>
+                </li>
+            }
+*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

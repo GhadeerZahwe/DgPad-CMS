@@ -25,19 +25,20 @@ namespace dgPadCms.Areas.Admin.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        // GET /admin/products
+        // GET /admin/posts
         public async Task<IActionResult> Index(int p = 1)
         {
             int pageSize = 6;
+
             var posts = context.Posts.OrderByDescending(x => x.Id)
                                             .Include(x => x.PostType)
+                                            .Include(x => x.PostTerms)
                                             .Skip((p - 1) * pageSize)
                                             .Take(pageSize);
 
             ViewBag.PageNumber = p;
             ViewBag.PageRange = pageSize;
             ViewBag.TotalPages = (int)Math.Ceiling((decimal)context.Posts.Count() / pageSize);
-
             return View(await posts.ToListAsync());
         }
 
@@ -46,7 +47,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
-
+            ViewBag.TermId = new SelectList(context.Terms, "Id", "Name");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Post post)
         {
             ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
+            ViewBag.TermId = new SelectList(context.Terms, "Id", "Name");
 
             if (ModelState.IsValid)
             {
@@ -67,6 +69,12 @@ namespace dgPadCms.Areas.Admin.Controllers
                     ModelState.AddModelError("", "The post already exists.");
                     return View(post);
                 }
+           
+                //foreach (var item in )
+                //    post.PostTerms.Add(new PostTerm()
+                //    {
+                //        TermId = int.Parse(item)
+                //    }) ;
 
                 string imageName = "noimage.png";
                 if (post.ImageUpload != null)
@@ -96,7 +104,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         // GET /admin/products/details/5
         public async Task<IActionResult> Details(int id)
         {
-            Post post = await context.Posts.Include(x => x.PostType).FirstOrDefaultAsync(x => x.Id == id);
+            Post post = await context.Posts.Include(x => x.PostType).Include(x => x.PostTerms).FirstOrDefaultAsync(x => x.Id == id);
             if (post == null)
             {
                 return NotFound();
@@ -115,6 +123,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             }
 
             ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title", post.PostTypeId);
+            ViewBag.TermId = new SelectList(context.Terms, "Id", "Name",post.PostTerms);
 
             return View(post);
         }
@@ -125,6 +134,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id, Post post)
         {
             ViewBag.CategoryId = new SelectList(context.PostType, "Id", "Title", post.PostTypeId);
+            ViewBag.TermId = new SelectList(context.Terms, "Id", "Name", post.PostTerms);
 
             if (ModelState.IsValid)
             {

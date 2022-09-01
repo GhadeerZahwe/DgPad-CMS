@@ -24,16 +24,17 @@ namespace dgPadCms.Models
 
         [Display(Name = "PostType")]
         [Range(1, int.MaxValue, ErrorMessage = "You must choose a PostType")]
-        public int PostTypeId { get; set; }
+        public int PostTypeId { get; set; }  
+        
+   
 
         [ForeignKey("PostTypeId")]
-        public virtual PostType PostType { get; set; }
-
+        public virtual PostType PostType { get; set; } 
+        
         [NotMapped]
         [FileExtension]
         public IFormFile ImageUpload { get; set; }
 
-        [NotMapped]
-        public virtual ICollection<Term> Terms { get; set; }
+        public virtual ICollection<PostTerm> PostTerms { get; set; }
     }
 }

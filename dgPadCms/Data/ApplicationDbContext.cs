@@ -18,23 +18,24 @@ namespace dgPadCms.Data
    
         protected override void OnModelCreating(ModelBuilder builder)
         {   
-            //// PostTerm: set primary key 
-            //builder.Entity<PostTerm>().HasKey(po => new { po.PostId, po.TermId });
-
-            //// PostTerm: set foreign keys 
-            //builder.Entity<PostTerm>().HasOne(po => po.Post)
-            //    .WithMany(p => p.PostTerms)
-            //    .HasForeignKey(pa => pa.PostId);
-
-            //builder.Entity<PostTerm>().HasOne(po => po.Term)
-            //   .WithMany(p => p.PostTerms)
-            //   .HasForeignKey(pa => pa.TermId);
+           
 
            base.OnModelCreating(builder);
             builder.Entity<IdentityUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>(entity => { entity.ToTable("UserRoles"); });
-
+            builder.Entity<PostTerm>()
+            .HasKey(bc => new { bc.TermId, bc.PostId });
+            builder.Entity<PostTerm>()
+                .HasOne(bc => bc.Term)
+                .WithMany(b => b.PostTerms)
+                .HasForeignKey(bc => bc.TermId)
+                .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<PostTerm>()
+                .HasOne(bc => bc.Post)
+                .WithMany(c => c.PostTerms)
+                .HasForeignKey(bc => bc.PostId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
 

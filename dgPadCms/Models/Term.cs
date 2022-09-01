@@ -22,6 +22,6 @@ namespace dgPadCms.Models
         public virtual Taxonomy Taxonomy { get; set; }
 
      
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<PostTerm> PostTerms { get; set; }
     }
 }

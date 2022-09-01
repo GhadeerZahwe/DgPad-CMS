@@ -25,7 +25,11 @@
             </th>
             <th>
                 PostType
-            </th>
+            </th>     
+       <th>
+                Term
+            </th>     
+     
             <th></th>
         </tr>
     </thead>
@@ -46,7 +50,16 @@
             </td>
             <td>
                 @item.PostType.Title
-            </td>
+            </td> 
+               <td>
+                    @foreach(var term in item.PostTerms)
+                    {
+                       
+                            @term.TermId
+                   
+                    }
+            </td> 
+           
             <td>
               <center>
          
