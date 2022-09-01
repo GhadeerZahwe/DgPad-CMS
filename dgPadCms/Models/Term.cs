@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dgPadCms.Models
@@ -17,8 +18,10 @@ namespace dgPadCms.Models
         [Range(1, int.MaxValue, ErrorMessage = "You must choose a taxonomy")]
         public int TaxonomyId { get; set; }
 
-
         [ForeignKey("TaxonomyId")]
         public virtual Taxonomy Taxonomy { get; set; }
+
+     
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

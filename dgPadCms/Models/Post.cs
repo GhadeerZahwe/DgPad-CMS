@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,6 @@ namespace dgPadCms.Models
     public class Post
     {
         public int Id { get; set; }
-
         [Required, MinLength(2, ErrorMessage = "Minimum length is 2")]
         
         public string Title { get; set; }
@@ -26,8 +26,6 @@ namespace dgPadCms.Models
         [Range(1, int.MaxValue, ErrorMessage = "You must choose a PostType")]
         public int PostTypeId { get; set; }
 
-
-
         [ForeignKey("PostTypeId")]
         public virtual PostType PostType { get; set; }
 
@@ -35,5 +33,7 @@ namespace dgPadCms.Models
         [FileExtension]
         public IFormFile ImageUpload { get; set; }
 
+        [NotMapped]
+        public virtual ICollection<Term> Terms { get; set; }
     }
 }

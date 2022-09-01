@@ -1639,6 +1639,9 @@ section {
 .navbar-sidebar .navbar__list li a i {
     margin-right: 19px;
 }
+.navbar-sidebar .navbar__list li button i {
+    margin-right: 19px;
+}
 
 .navbar-sidebar .navbar__list li a:hover {
     color: #4272d7;
