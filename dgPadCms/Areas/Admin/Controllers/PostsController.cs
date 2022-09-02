@@ -43,7 +43,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         }
 
 
-        // GET /admin/products/create
+        // GET /admin/posts/create
         public IActionResult Create()
         {
             ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
@@ -51,7 +51,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             return View();
         }
 
-        // POST /admin/products/create
+        // POST /admin/posts/create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Post post)
@@ -101,7 +101,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         }
 
 
-        // GET /admin/products/details/5
+        // GET /admin/posts/details/5
         public async Task<IActionResult> Details(int id)
         {
             Post post = await context.Posts.Include(x => x.PostType).Include(x => x.PostTerms).FirstOrDefaultAsync(x => x.Id == id);
@@ -128,7 +128,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             return View(post);
         }
 
-        // POST /admin/products/edit/5
+        // POST /admin/posts/edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Post post)
