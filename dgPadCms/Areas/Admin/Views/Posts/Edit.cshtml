@@ -61,6 +61,13 @@
                 </select>
                 <span asp-validation-for="PostTypeId" class="text-danger"></span>
             </div>
+                  <div class="form-group">
+                <label asp-for="PostTerms" class="control-label"></label>
+                <select asp-for="PostTerms" asp-items="@ViewBag.TermId " multiple ="multiple" class="form-control">
+                
+                </select>
+                <span asp-validation-for="PostTerms" class="text-danger"></span>
+            </div>  
             <div class="form-group">
                 <input type="submit" value="Edit" class="btn btn-primary" />
             </div>

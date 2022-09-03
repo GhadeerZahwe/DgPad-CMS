@@ -56,8 +56,6 @@ namespace dgPadCms.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Post post)
         {
-            ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
-            ViewBag.TermId = new SelectList(context.Terms, "Id", "Name");
 
             if (ModelState.IsValid)
             {
@@ -97,6 +95,9 @@ namespace dgPadCms.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
+            ViewBag.TermId = new SelectList(context.Terms, "Id", "Name");
+
             return View(post);
         }
 
@@ -133,7 +134,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Post post)
         {
-            ViewBag.CategoryId = new SelectList(context.PostType, "Id", "Title", post.PostTypeId);
+            ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title", post.PostTypeId);
             ViewBag.TermId = new SelectList(context.Terms, "Id", "Name", post.PostTerms);
 
             if (ModelState.IsValid)
