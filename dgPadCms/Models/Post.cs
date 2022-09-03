@@ -36,7 +36,7 @@ namespace dgPadCms.Models
         public IFormFile ImageUpload { get; set; }
 
         [Display(Name = "Term")]
-        [Range(int.MinValue, 5, ErrorMessage = "You must choose a Term")]
+        [Required(ErrorMessage = "You must choose a Term")]
         public virtual ICollection<PostTerm> PostTerms { get; set; }
     }
 }
