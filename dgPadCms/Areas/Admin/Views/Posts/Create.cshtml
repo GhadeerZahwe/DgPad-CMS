@@ -1,4 +1,4 @@
-﻿@model Post
+﻿@model dgPadCms.ViewModels.CreatePostViewModel
 
 @{
     ViewData["Title"] = "Create a Post";
@@ -49,14 +49,24 @@
                     <option value="0">Choose a PostType</option>
                 </select>
                 <span asp-validation-for="PostTypeId" class="text-danger"></span>
-            </div>  
-            <div class="form-group">
+            </div> 
+              <div class="form-group">
+                
+                @for(int i=0; i<Model.Terms.Count ;i++)
+                {
+                    <input asp-for="Terms[i].Value" type="hidden" class="form-control" /> 
+                    <input asp-for="Terms[i].Selected" class="form-control" />
+                    @Model.Terms[i].Text 
+                }
+               
+            </div>
+           @* <div class="form-group">
                 <label asp-for="PostTerms" class="control-label"></label>
                 <select asp-for="PostTerms" asp-items="@ViewBag.TermId" multiple ="multiple" class="form-control">
                 
                 </select>
                 <span asp-validation-for="PostTerms" class="text-danger"></span>
-            </div>    
+            </div>    *@
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

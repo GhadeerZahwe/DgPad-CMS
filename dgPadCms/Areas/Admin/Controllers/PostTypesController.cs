@@ -1,6 +1,5 @@
 ﻿using dgPadCms.Data;
 using dgPadCms.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,18 +9,16 @@ using System.Threading.Tasks;
 
 namespace dgPadCms.Areas.Admin.Controllers
 {
-   
-     [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class PostTypesController : Controller
     {
         private readonly ApplicationDbContext context;
-     
+
 
         public PostTypesController(ApplicationDbContext context)
         {
             this.context = context;
-       
+
         }
 
         // GET /admin/posttypes
@@ -29,7 +26,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         {
             int pageSize = 6;
             var posttypes = context.PostType.OrderByDescending(x => x.Id)
-                                            .Include(x => x.Taxonomy)
+                                            .Include(x => x.TaxonomyPostTypes)
                                             .Skip((p - 1) * pageSize)
                                             .Take(pageSize);
 
@@ -43,46 +40,66 @@ namespace dgPadCms.Areas.Admin.Controllers
         // GET /admin/posttypes/create
         public IActionResult Create()
         {
-            ViewBag.TaxonomyId = new SelectList(context.Taxonomies.OrderBy(x => x.Sorting), "Id", "Name");
 
-            return View();
+            var taxonomies = context.Taxonomies.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+            }).ToList();
+            CreatePostTypeViewModel vm = new CreatePostTypeViewModel();
+            vm.Taxonomies = taxonomies;
+            return View(vm);
         }
 
 
         // POST /admin/posttypes/create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PostType posttype)
+        public IActionResult Create(CreatePostTypeViewModel vm)
         {
-            ViewBag.TaxonomyId = new SelectList(context.Taxonomies.OrderBy(x => x.Sorting), "Id", "Name");
-
-            if (ModelState.IsValid)
+            var posttype = new PostType
             {
-                posttype.Code = posttype.Title.ToLower().Replace(" ", "-");
+                Title = vm.Title,
+                Code = vm.Code
+            };
 
-                var code = await context.PostType.FirstOrDefaultAsync(x => x.Code == posttype.Code);
-                if (code != null)
+            var selectedTaxonomies = vm.Taxonomies.Where(x => x.Selected).Select(y => y.Value).ToList();
+            foreach (var item in selectedTaxonomies)
+            {
+                posttype.TaxonomyPostTypes.Add(new TaxonomyPostType()
                 {
-                    ModelState.AddModelError("", "The post type already exists.");
-                    return View(posttype);
-                }
-
-                context.Add(posttype);
-                await context.SaveChangesAsync();
-
-                TempData["Success"] = "The post type has been added!";
-
-                return RedirectToAction("Index");
+                    TaxonomyId = int.Parse(item)
+                });
             }
+            context.PostType.Add(posttype);
+            context.SaveChanges();
+            TempData["Success"] = "The post type has been added!";
+            return RedirectToAction("Index");
+            //    if (code != null)
+            //    {
+            //        ModelState.AddModelError("", "The post type already exists.");
+            //        return View(posttype);
+            //    }
 
-            return View(posttype);
+            //    context.Add(posttype);
+            //    await context.SaveChangesAsync();
+
+
+
+            //    return RedirectToAction("Index");
+            //}
+
+            //return View(posttype);
         }
 
 
         // GET /admin/posttypes/details/5
+        // GET: Student/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            PostType posttype = await context.PostType.Include(x => x.Taxonomy).FirstOrDefaultAsync(x => x.Id == id);
+
+            var posttype = await context.PostType.Include(x => x.TaxonomyPostTypes).ThenInclude(y => y.Taxonomy)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (posttype == null)
             {
                 return NotFound();
@@ -95,44 +112,62 @@ namespace dgPadCms.Areas.Admin.Controllers
         // GET /admin/posttypes/edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            PostType posttype = await context.PostType.FindAsync(id);
+
+
+            var posttype = await context.PostType.Include(x => x.TaxonomyPostTypes).Where(y => y.Id == id)
+                .FirstOrDefaultAsync();
             if (posttype == null)
             {
                 return NotFound();
             }
-
-            ViewBag.TaxonomyId = new SelectList(context.Taxonomies.OrderBy(x => x.Sorting), "Id", "Name", posttype.TaxonomyId);
-
-            return View(posttype);
+            var selectedIds = posttype.TaxonomyPostTypes.Select(x => x.TaxonomyId).ToList();
+            var items = context.Taxonomies.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = selectedIds.Contains(x.Id)
+            }).ToList();
+            CreatePostTypeViewModel vm = new CreatePostTypeViewModel();
+            vm.Title = posttype.Title;
+            vm.Code = posttype.Code;
+            vm.Taxonomies = items;
+            return View(vm);
         }
 
 
         // POST /admin/posttypes/edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, PostType posttype)
+        public IActionResult Edit(CreatePostTypeViewModel vm)
         {
-            ViewBag.TaxonomyId = new SelectList(context.Taxonomies.OrderBy(x => x.Sorting), "Id", "Name", posttype.TaxonomyId);
-
-            if (ModelState.IsValid)
+            //    ViewBag.TaxonomyId = new SelectList(context.Taxonomies.OrderBy(x => x.Sorting), "Id", "Name", posttype.TaxonomyId);
+            var posttype = context.PostType.Find(vm.Id);
+            posttype.Title = vm.Title;
+            posttype.Code = vm.Code;
+            var posttypeById = context.PostType.Include(x => x.TaxonomyPostTypes).FirstOrDefault(y => y.Id == vm.Id);
+            var existingIds = posttypeById.TaxonomyPostTypes.Select(x => x.TaxonomyId).ToList();
+            var selectedIds = vm.Taxonomies.Where(x => x.Selected).Select(y => y.Value).Select(int.Parse).ToList();
+            var toAdd = selectedIds.Except(existingIds);
+            var toRemove = existingIds.Except(selectedIds);
+            posttype.TaxonomyPostTypes = posttype.TaxonomyPostTypes.Where(x => !toRemove.Contains(x.TaxonomyId)).ToList();
+            foreach (var item in toAdd)
             {
-                posttype.Code = posttype.Title.ToLower().Replace(" ", "-");
-
-                var code = await context.PostType.Where(x => x.Id != id).FirstOrDefaultAsync(x => x.Code == posttype.Code);
-                if (code != null)
+                posttype.TaxonomyPostTypes.Add(new TaxonomyPostType()
                 {
-                    ModelState.AddModelError("", "The posttype already exists.");
-                    return View(posttype);
-                }
-                 context.Update(posttype);
-            await context.SaveChangesAsync();
-                TempData["Success"] = "The post type has been edited!";
-
-                return RedirectToAction("Index");
+                    TaxonomyId = item
+                });
             }
-          
-            return View(posttype);
+            context.PostType.Update(posttype);
+            context.SaveChangesAsync();
+            TempData["Success"] = "The post type has been edited!";
+            return RedirectToAction(nameof(Index));
+
         }
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(posttype);
+        //}
 
         // GET /admin/posttypes/delete/5
         public async Task<IActionResult> Delete(int id)

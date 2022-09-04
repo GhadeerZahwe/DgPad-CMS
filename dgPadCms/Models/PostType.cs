@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dgPadCms.Models
@@ -11,13 +12,9 @@ namespace dgPadCms.Models
         public string Code { get; set; }
 
         [Display(Name = "Taxonomy")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must choose a taxonomy")]
-        public int TaxonomyId { get; set; }
+        [Required(ErrorMessage = "You must choose a taxonomy")]
+        public ICollection<TaxonomyPostType> TaxonomyPostTypes { get; set; } = new HashSet<TaxonomyPostType>();
 
 
-        [ForeignKey("TaxonomyId")]
-        public virtual Taxonomy Taxonomy { get; set; }
-
-     
     }
 }

@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using dgPadCms.ViewModels;
 
 namespace dgPadCms.Areas.Admin.Controllers
 {
@@ -46,9 +47,16 @@ namespace dgPadCms.Areas.Admin.Controllers
         // GET /admin/posts/create
         public IActionResult Create()
         {
-            ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
-            ViewBag.TermId = new SelectList(context.Terms, "Id", "Name");
-            return View();
+           ViewBag.PostTypeId = new SelectList(context.PostType, "Id", "Title");
+            //ViewBag.TermId = new SelectList(context.Terms, "Id", "Name");
+            var terms = context.Terms.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+            }).ToList();
+            CreatePostViewModel vm = new CreatePostViewModel();
+            vm.Terms = terms;
+            return View(vm);
         }
 
         // POST /admin/posts/create

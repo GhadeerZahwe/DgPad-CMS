@@ -40,8 +40,8 @@ namespace dgPadCms.Data
 
 
        public DbSet<Term> Terms { get; set; }
-    
-       public DbSet<PostType> PostType { get; set; }
+        public DbSet<TaxonomyPostType> TaxonomyPostTypes { get; set; }
+        public DbSet<PostType> PostType { get; set; }
         public DbSet<Taxonomy> Taxonomies { get; set; }
         public DbSet<Post> Posts { get; set; }
     
