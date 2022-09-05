@@ -20,15 +20,36 @@
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-                 <div class="form-group">
-                
+              <div class="form-group checkbox checkboxlist col-sm-10">
+                     <br />
+                <table>
+                    <h5>Choose at least one Taxonomy:</h5>
                 @for(int i=0; i<Model.Taxonomies.Count ;i++)
-                {
-                    <input asp-for="Taxonomies[i].Value" type="hidden" class="form-control" /> 
-                    <input asp-for="Taxonomies[i].Selected"  class="form-control" /> @Model.Taxonomies[i].Text 
+                {         <tr>
+                            
+                    <input asp-for="Taxonomies[i].Value" type="hidden" class="control-label" /> 
+                     <br>
+                    <input asp-for="Taxonomies[i].Selected"  class="control-label" /> @Model.Taxonomies[i].Text
+                   
+                    </tr>
                 }
-               
+               </table>
             </div>
+        @*    <div class="form-group checkbox checkboxlist col-sm9">
+                <table>
+                    @foreach (var i in ViewBag.taxonomies)
+                    {
+                        <tr>
+                            <td>
+                                <label class="control-label">@i.Name</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" value="@i.TaxonomyId" name="taxonomyIdList" class="form-control" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>*@
           @*  <div class="form-group">
                 <label asp-for="TaxonomyId" class="control-label"></label>
                 <select asp-for="TaxonomyId" asp-items="@ViewBag.TaxonomyId" class="form-control">
