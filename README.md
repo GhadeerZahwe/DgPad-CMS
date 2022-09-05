@@ -5,15 +5,11 @@
                                                Description
 ============================================================================================
 A content management system (CMS) helps companies manage digital content. It contains an admin panel 
-that allow admins to set the role of each member. For example, some team members as publishers and 
+that allow admins to set the role of each member. Also, some team members as publishers and 
 editors can use these systems to create, edit, organize, and publish content. 
  
                                               Admin Panel
 ============================================================================================
->>Register and Login pages:
-![image](https://user-images.githubusercontent.com/88279980/188484863-a0bd337b-6f3e-4cc0-957f-3f390e4c6fee.png)
-![image](https://user-images.githubusercontent.com/88279980/188484905-43f22bd8-e247-4125-b7e7-6750a795b505.png)
-
 >>After logging in as an admin, the Dashboard Page will be shown on the screen:
 ![image](https://user-images.githubusercontent.com/88279980/188479883-6ad0ce6e-f54d-4aa9-9390-47ad46d9aece.png)
 
@@ -54,3 +50,9 @@ for each of these actions.
 
 >>Setting Roles to Users:
 ![image](https://user-images.githubusercontent.com/88279980/188484629-1ed1a497-313d-4217-aed1-e2d737d7d537.png)
+
+>>Register and Login pages:
+![image](https://user-images.githubusercontent.com/88279980/188484863-a0bd337b-6f3e-4cc0-957f-3f390e4c6fee.png)
+![image](https://user-images.githubusercontent.com/88279980/188484905-43f22bd8-e247-4125-b7e7-6750a795b505.png)
+
+
