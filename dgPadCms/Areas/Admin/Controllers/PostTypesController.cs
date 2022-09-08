@@ -1,5 +1,4 @@
-﻿using dgPadCms.Data;
-using dgPadCms.Models;
+﻿using Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +47,7 @@ namespace dgPadCms.Areas.Admin.Controllers
                 Value = x.Id.ToString(),
             }).ToList();
             CreatePostTypeViewModel vm = new CreatePostTypeViewModel();
-            vm.Taxonomies = taxonomies;
+            vm.Taxonomies = (System.Collections.Generic.IList<System.Web.Mvc.SelectListItem>)taxonomies;
             return View(vm);
         }
 
@@ -131,7 +130,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             CreatePostTypeViewModel vm = new CreatePostTypeViewModel();
             vm.Title = posttype.Title;
             vm.Code = posttype.Code;
-            vm.Taxonomies = items;
+            vm.Taxonomies = (System.Collections.Generic.IList<System.Web.Mvc.SelectListItem>)items;
             return View(vm);
         }
 

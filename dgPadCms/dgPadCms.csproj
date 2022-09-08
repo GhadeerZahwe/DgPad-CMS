@@ -228,4 +228,8 @@
     <None Include="wwwroot\Admin\vendor\wow\wow.min.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\Common.csproj" />
+  </ItemGroup>
+
 </Project>

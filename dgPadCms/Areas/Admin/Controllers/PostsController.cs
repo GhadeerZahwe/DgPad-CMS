@@ -1,5 +1,4 @@
-﻿using dgPadCms.Data;
-using dgPadCms.Models;
+﻿using Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using dgPadCms.Models;
+
 
 namespace dgPadCms.Areas.Admin.Controllers
 {
@@ -55,7 +54,7 @@ namespace dgPadCms.Areas.Admin.Controllers
                 Value = x.Id.ToString(),
             }).ToList();
             CreatePostViewModel vm = new CreatePostViewModel();
-            vm.Terms = terms;
+            vm.Terms = (System.Collections.Generic.IList<System.Web.Mvc.SelectListItem>)terms;
             return View(vm);
         }
 
