@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using dgPadCms.ViewModels;
+using dgPadCms.Models;
 
 namespace dgPadCms.Areas.Admin.Controllers
 {

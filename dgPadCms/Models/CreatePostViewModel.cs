@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using dgPadCms.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,11 +9,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dgPadCms.Models
 {
-    public class Post
+    public class CreatePostViewModel
     {
         public int Id { get; set; }
         [Required, MinLength(2, ErrorMessage = "Minimum length is 2")]
-        
+
         public string Title { get; set; }
         public string Code { get; set; }
         [DisplayName("CreationDate")]
@@ -24,19 +26,15 @@ namespace dgPadCms.Models
 
         [Display(Name = "PostType")]
         [Range(1, int.MaxValue, ErrorMessage = "You must choose a PostType")]
-        public int PostTypeId { get; set; }  
-        
-   
+        public int PostTypeId { get; set; }
 
         [ForeignKey("PostTypeId")]
-        public virtual PostType PostType { get; set; } 
-        
+        public virtual PostType PostType { get; set; }
+
         [NotMapped]
         [FileExtension]
         public IFormFile ImageUpload { get; set; }
-
-        [Display(Name = "Term")]
-        [Required(ErrorMessage = "You must choose a Term")]
-        public virtual IEnumerable<PostTerm> PostTerms { get; set; }
+       
+        public virtual IList<SelectListItem> Terms { get; set; }
     }
 }
