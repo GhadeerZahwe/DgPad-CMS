@@ -16,21 +16,21 @@ namespace PublicWebsite.Controllers
 
         }
 
-        //// GET /admin/posts
-        //public async Task<IActionResult> Index(int p = 1)
-        //{
-        //    int pageSize = 6;
-        //    var posts = context.Posts.OrderByDescending(x => x.Id)
-        //                                    .Include(x => x.PostType)
-        //                                    .Skip((p - 1) * pageSize)
-        //                                    .Take(pageSize);
+        // GET /admin/posts
+        public async Task<IActionResult> Index(int p = 1)
+        {
+            int pageSize = 6;
+            var posts = context.Posts.OrderByDescending(x => x.Id)
+                                            .Include(x => x.PostType)
+                                            .Skip((p - 1) * pageSize)
+                                            .Take(pageSize);
 
-        //    ViewBag.PageNumber = p;
-        //    ViewBag.PageRange = pageSize;
-        //    ViewBag.TotalPages = (int)Math.Ceiling((decimal)context.Posts.Count() / pageSize);
+            ViewBag.PageNumber = p;
+            ViewBag.PageRange = pageSize;
+            ViewBag.TotalPages = (int)Math.Ceiling((decimal)context.Posts.Count() / pageSize);
 
-        //    return View(await posts.ToListAsync());
-        //}
+            return View(await posts.ToListAsync());
+        }
         //public IActionResult Index(int id)
         //{
         //    PostType p = context.PostType.Find(id);
