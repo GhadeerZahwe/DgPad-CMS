@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -14,19 +14,6 @@
     <EmbeddedResource Remove="wwwroot\Admin\scss\**" />
     <None Remove="wwwroot\Admin\img\**" />
     <None Remove="wwwroot\Admin\scss\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Data\Migrations\20220829173352_adds.cs" />
-    <Compile Remove="Data\Migrations\20220829173352_adds.Designer.cs" />
-    <Compile Remove="Data\Migrations\20220901123122_Postterms.cs" />
-    <Compile Remove="Data\Migrations\20220901123122_Postterms.Designer.cs" />
-    <Compile Remove="Data\Migrations\20220901124031_Postterm.cs" />
-    <Compile Remove="Data\Migrations\20220901124031_Postterm.Designer.cs" />
-    <Compile Remove="Data\Migrations\20220901215316_Postssss.cs" />
-    <Compile Remove="Data\Migrations\20220901215316_Postssss.Designer.cs" />
-    <Compile Remove="Data\Migrations\20220902124404_posttermss.cs" />
-    <Compile Remove="Data\Migrations\20220902124404_posttermss.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,13 +34,39 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Default\Index.cshtml" />
     <None Include="Areas\Admin\Views\Posts\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Posts\Details.cshtml" />
     <None Include="Areas\Admin\Views\Posts\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Posts\Index.cshtml" />
+    <None Include="Areas\Admin\Views\PostTypes\Create.cshtml" />
+    <None Include="Areas\Admin\Views\PostTypes\Details.cshtml" />
+    <None Include="Areas\Admin\Views\PostTypes\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\PostTypes\Index.cshtml" />
     <None Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <None Include="Areas\Admin\Views\Roles\roles.cshtml" />
     <None Include="Areas\Admin\Views\Roles\UserRoles.cshtml" />
     <None Include="Areas\Admin\Views\Roles\users.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_NotificationPartial.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Admin\Views\Taxonomies\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Taxonomies\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Taxonomies\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Terms\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Terms\Details.cshtml" />
+    <None Include="Areas\Admin\Views\Terms\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Terms\Index.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\Admin\fonts\poppins\poppins-v5-latin-100.svg" />
     <None Include="wwwroot\Admin\fonts\poppins\poppins-v5-latin-100.woff2" />
     <None Include="wwwroot\Admin\fonts\poppins\poppins-v5-latin-100italic.svg" />
@@ -235,10 +248,6 @@
     <None Include="wwwroot\Admin\vendor\vector-map\jquery.vmap.world.js" />
     <None Include="wwwroot\Admin\vendor\wow\wow.min.js" />
     <None Include="wwwroot\lib\MultiSelect\fastselect.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,79 +1,49 @@
-﻿@model Common.Post
+﻿@model dgPadCms.Models.Post
 
 @{
-    ViewData["Title"] = "Post Details";
+    ViewData["Title"] = "Details";
 }
 
 <div class="row ">
-<div class="col-md-10 au-card recent-report">
-<h2>Posts Details</h2>
+<div class="col-md-5 au-card recent-report">
+<h2>Details</h2>
  </div>
  </div>
 <div>
- 
-
-<div>
-  
-    <dl class="col-md-10 au-card recent-report">
+     <dl class="row col-md-5 au-card recent-report">
         <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.PostTitle)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.PostTitle)
         </dd>
         <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.CreationDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.CreationDate)
         </dd>
         <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Code)
+            @Html.DisplayNameFor(model => model.Details)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Code)
-        </dd>
-        <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Detail)
-        </dt>
-        <dd class = "col-sm-10">
-             @Html.Raw(Model.Detail)
+            @Html.DisplayFor(model => model.Details)
         </dd>
         <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Summary)
         </dt>
         <dd class = "col-sm-10">
-              @Html.Raw(Model.Summary)
+            @Html.DisplayFor(model => model.Summary)
         </dd>
         <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Image)
+            @Html.DisplayNameFor(model => model.PostType)
         </dt>
         <dd class = "col-sm-10">
-            <img src="~/media/posts/@Model.Image" width="200" alt="" />
-        </dd>
-        <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.PostTypeId)
-        </dt>
-        <dd class = "col-sm-10">
-             @Model.PostType.Title
-           
-        </dd>   
-        <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.PostTerms)
-        </dt>
-        <dd class = "col-sm-10">
-             @Model.PostTerms
-           
+            @Html.DisplayFor(model => model.PostType.Title)
         </dd>
     </dl>
 </div>
 <div>
-  <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.PostId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

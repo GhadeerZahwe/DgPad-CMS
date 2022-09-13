@@ -62,8 +62,8 @@ namespace Common
         }
 
 
-       public DbSet<Term> Terms { get; set; }
-       public DbSet<PostTerm> PostTerms { get; set; }
+        public DbSet<Term> Terms { get; set; }
+        public DbSet<PostTerm> PostTerms { get; set; }
         public DbSet<TaxonomyPostType> TaxonomyPostTypes { get; set; }
         public DbSet<PostType> PostType { get; set; }
         public DbSet<Taxonomy> Taxonomies { get; set; }

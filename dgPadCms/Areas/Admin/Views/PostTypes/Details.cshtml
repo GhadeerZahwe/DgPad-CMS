@@ -1,26 +1,17 @@
-﻿@model Common.PostType
+﻿@model PostType
 
 @{
-    ViewData["Title"] = "PostTypes Details";
+    ViewData["Title"] = Model.Title;
 }
-
-
 
 <div class="row ">
 <div class="col-md-5 au-card recent-report">
 <h2>PostTypes Details</h2>
  </div>
  </div>
- 
+
 <div>
-  
-    <dl class="row col-md-5 au-card recent-report">
-        <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
+     <dl class="row col-md-5 au-card recent-report">
         <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -33,27 +24,24 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Code)
         </dd>
-  @*      <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.TaxonomyId)
+        <dt class="col-sm-5">
+            Taxonomies
         </dt>
-        <dd class = "col-sm-10">
-                @Model.Taxonomy.Name
-        </dd>*@
-        <dt class = "col-sm-3">
-          Taxonomies:
-        </dt>
-    <dd class = "col-sm-10">
-    @foreach (var item in Model.TaxonomyPostTypes)
-   {
-       <span>
-           @item.Taxonomy.Name 
-           <br/>
-       </span>
-   }
-   </dd>
+        <dd class="col-sm-10">
+            <table>
+                @foreach (var i in ViewBag.isChecked)
+                {
+                    <tr>
+                        <td>
+                            <label class="control-label">@i.Taxonomy.Name</label>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>
-  <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.PostTypeId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

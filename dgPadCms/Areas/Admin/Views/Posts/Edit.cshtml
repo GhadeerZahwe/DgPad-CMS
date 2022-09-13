@@ -1,4 +1,4 @@
-﻿@model Common.Post
+﻿@model dgPadCms.Models.Post
 
 @{
     ViewData["Title"] = "Edit";
@@ -15,53 +15,38 @@
     <div class="col-md-10 au-card recent-report">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-             <input type="hidden" asp-for="Image" />
-            <input type="hidden" asp-for="Id" />
-
+            <input type="hidden" asp-for="PostId" />
             <div class="form-group">
                 <label asp-for="PostTypeId" class="control-label">Post Type:</label>
                 <span class="form-control">@ViewBag.PostType.Title</span>
-                <input asp-for="PostTypeId" type="hidden" value="@ViewBag.PostType.Id" />
+                <input asp-for="PostTypeId" type="hidden" value="@ViewBag.PostType.PostTypeId" />
+            </div>
+                   <div class="form-group">
+                <label asp-for="CreationDate" class="control-label"></label>
+                <input asp-for="CreationDate"    class="form-control" />
+                <span asp-validation-for="CreationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-               <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="PostTitle" class="control-label"></label>
+                <input asp-for="PostTitle" class="form-control" />
+                <span asp-validation-for="PostTitle" class="text-danger"></span>
             </div>
-              <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" type="date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Detail" class="control-label"></label>
-                 <textarea asp-for="Detail" class="form-control"></textarea>
-                <span asp-validation-for="Detail" class="text-danger"></span>
+           <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                 <textarea asp-for="Details" class="form-control"></textarea>
+                <span asp-validation-for="Details" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Summary" class="control-label"></label>
                  <textarea asp-for="Summary" class="form-control"></textarea>
                 <span asp-validation-for="Summary" class="text-danger"></span>
             </div>
-                <div class="form-group">
-                <label asp-for="Image" class="control-label">Current Image</label>
-                <img src="~/media/posts/@Model.Image" width="200" alt="" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Image" class="control-label">New Post Image</label>
-                <input asp-for="ImageUpload" class="form-control" />
-                <img src="" id="imgpreview" class="pt-2" alt="" />
-                <span asp-validation-for="ImageUpload" class="text-danger"></span>
-            </div>
-
             <div class="form-group">
                 <label class="control-label">Terms</label>
-                <select name="termIdList" class="form-control multipleSelect" multiple>
+                <select name="termIdList" class="form-control multipleSelect multiple">
                     @foreach (var i in ViewBag.Terms)
                     {
-                        <option value="@i.Id">@i.Name</option>
+                        <option value="@i.TermId">@i.Name</option>
                     }
                 </select>
             </div>
@@ -83,7 +68,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-            CKEDITOR.replace("Detail");
+            CKEDITOR.replace("Details");
             CKEDITOR.replace("Summary");
 
             $("#ImageUpload").change(function () {
@@ -91,7 +76,6 @@
             });
     </script>
 }
-
 
     @section MultiSelect{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

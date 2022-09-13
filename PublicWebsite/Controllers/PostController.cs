@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 
 namespace PublicWebsite.Controllers
 {
@@ -15,22 +16,37 @@ namespace PublicWebsite.Controllers
             this.context = context;
 
         }
+        ////Just List Posts
+        //public IActionResult Index()
+        //{
+        //    var postype_tar = context.CheckPostType();
+        //    var target_tar = context.CheckAllTerm();
+        //    List<PostType> ptypes = new List<PostType>();
 
-        // GET /admin/posts
-        public async Task<IActionResult> Index(int p = 1)
-        {
-            int pageSize = 6;
-            var posts = context.Posts.OrderByDescending(x => x.Id)
-                                            .Include(x => x.PostType)
-                                            .Skip((p - 1) * pageSize)
-                                            .Take(pageSize);
 
-            ViewBag.PageNumber = p;
-            ViewBag.PageRange = pageSize;
-            ViewBag.TotalPages = (int)Math.Ceiling((decimal)context.Posts.Count() / pageSize);
+        //    foreach (PostType i in postype_tar)
+        //    {
+        //        int pid = i.Id;
 
-            return View(await posts.ToListAsync());
-        }
+        //        PostType ptype = context.getPostTypeId(pid);
+
+        //        ptypes.Add(new PostType
+        //        {
+        //            Title = ptype.Title,
+        //            TaxonomyPostTypes = ptype.TaxonomyPostTypes
+
+        //        });
+
+        //    }
+        //    ViewBag.Ptypes = ptypes;
+
+
+        //    var pos = context.OrderPost();
+
+        //    return View(pos.ToList());
+
+
+        //}
         //public IActionResult Index(int id)
         //{
         //    PostType p = context.PostType.Find(id);

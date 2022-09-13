@@ -1,30 +1,28 @@
-﻿using Common;
+﻿
+using dgPadCms.Data;
+using dgPadCms.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace dgPadCms.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")] 
     [Area("Admin")]
     public class TaxonomiesController : Controller
     {
         private readonly ApplicationDbContext context;
-
         public TaxonomiesController(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-
         // GET /admin/taxonomies
         public async Task<IActionResult> Index()
         {
-            return View(await context.Taxonomies.OrderBy(x => x.Sorting).ToListAsync());
+            var taxonomies = await context.Taxonomies.OrderByDescending(p => p.TaxonomyId).ToListAsync();
+            return View(taxonomies);
         }
-
 
         // GET /admin/taxonomies/create
         public IActionResult Create() => View();
@@ -34,10 +32,22 @@ namespace dgPadCms.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Taxonomy taxonomy)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(taxonomy);
+            }
+
+            var name = await context.Taxonomies.FirstOrDefaultAsync(x => x.Name == taxonomy.Name);
+           
+            if (name != null)
+            {
+                ModelState.AddModelError("", "This Taxonomy already exist");
+                return View(taxonomy);
+            }
             if (ModelState.IsValid)
             {
                 taxonomy.Code = taxonomy.Name.ToLower().Replace(" ", "-");
-                taxonomy.Sorting = 100;
+             
 
                 var code = await context.Taxonomies.FirstOrDefaultAsync(x => x.Code == taxonomy.Code);
                 if (code != null)
@@ -54,7 +64,10 @@ namespace dgPadCms.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(taxonomy);
+            context.Add(taxonomy);
+            await context.SaveChangesAsync();
+            return RedirectToAction("Index");
+
         }
 
         // GET /admin/taxonomies/edit/5
@@ -78,7 +91,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             {
                 taxonomy.Code = taxonomy.Name.ToLower().Replace(" ", "-");
 
-                var code = await context.Taxonomies.Where(x => x.Id != id).FirstOrDefaultAsync(x => x.Code == taxonomy.Code);
+                var code = await context.Taxonomies.Where(x => x.TaxonomyId != id).FirstOrDefaultAsync(x => x.Code == taxonomy.Code);
                 if (code != null)
                 {
                     ModelState.AddModelError("", "The taxonomy already exists.");
@@ -96,44 +109,13 @@ namespace dgPadCms.Areas.Admin.Controllers
             return View(taxonomy);
         }
 
-
-        // GET /admin/taxonomies/delete/5
+        // GET /admin/taxonomies/delete/id
         public async Task<IActionResult> Delete(int id)
         {
-            Taxonomy taxonomy = await context.Taxonomies.FindAsync(id);
-
-            if (taxonomy == null)
-            {
-                TempData["Error"] = "The taxonomy does not exist!";
-            }
-            else
-            {
-                context.Taxonomies.Remove(taxonomy);
-                await context.SaveChangesAsync();
-
-                TempData["Success"] = "The taxonomy has been deleted!";
-            }
-
+            var taxonomy = await context.Taxonomies.FindAsync(id);
+            context.Taxonomies.Remove(taxonomy);
+            await context.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-
-        // POST /admin/taxonomies/categories
-        [HttpPost]
-        public async Task<IActionResult> Reorder(int[] id)
-        {
-            int count = 1;
-
-            foreach (var categoryId in id)
-            {
-                Taxonomy taxonomy = await context.Taxonomies.FindAsync(categoryId);
-                taxonomy.Sorting = count;
-                context.Update(taxonomy);
-                await context.SaveChangesAsync();
-                count++;
-            }
-
-            return Ok();
         }
     }
 }

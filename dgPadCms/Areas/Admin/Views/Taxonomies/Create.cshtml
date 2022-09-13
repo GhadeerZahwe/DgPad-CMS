@@ -1,8 +1,9 @@
-﻿@model Common.Taxonomy
+﻿@model Taxonomy
 
 @{
     ViewData["Title"] = "Create Taxonomy";
 }
+
 
 <div class="row ">
 <div class="col-md-5 au-card recent-report">
@@ -13,13 +14,12 @@
     <div class="col-md-5 au-card recent-report">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-          
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

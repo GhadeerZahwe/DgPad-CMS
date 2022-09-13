@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Common.Taxonomy>
+﻿@model IEnumerable<dgPadCms.Models.Taxonomy>
 
 @{
-    ViewData["Title"] = "Taxonomies";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Taxonomies</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,34 +12,25 @@
 <table class="table sorting table table-borderless table-striped table-earning" id="taxonomies">
     <thead>
         <tr>
-         
             <th>
                 Name
             </th>
-        @*    <th>
-                 Code
-            </th>
-         *@
-            
+          
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr id="id_@item.Id" >
-         
+        <tr>
             <td>
-                   @item.Name
-            </td> 
-         @*   <td>
-                   @item.Code
-            </td>*@
-    
-            <td>
+                @item.Name
+            </td>
+          
+                <td>
                  <center>
-                <a asp-action="Edit" asp-route-id="@item.Id" >Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.TaxonomyId" >Edit</a> |
 
-                  <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id" >Delete</a>
+                  <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.TaxonomyId" >Delete</a>
                       <center>
       
             </center>
@@ -50,7 +41,7 @@
     </tbody>
 </table>
 
-@section Scripts {
+@*@section Scripts {
     <script>
         $("table#taxonomies tbody").sortable({
             items: "tr:not(.home)",
@@ -63,4 +54,4 @@
             }
         })
     </script>
-}
+}*@
