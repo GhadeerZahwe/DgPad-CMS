@@ -24,18 +24,41 @@ namespace Common
             builder.Entity<IdentityUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>(entity => { entity.ToTable("UserRoles"); });
+
             builder.Entity<PostTerm>()
             .HasKey(bc => new { bc.TermId, bc.PostId });
+            builder.Entity<Term>()
+               .HasOne(t => t.Taxonomy)
+               .WithMany(te => te.Terms);
+
+            builder.Entity<Post>()
+               .HasOne(p => p.PostType)
+               .WithMany(pt => pt.Posts);
+
             builder.Entity<PostTerm>()
                 .HasOne(bc => bc.Term)
                 .WithMany(b => b.PostTerms)
                 .HasForeignKey(bc => bc.TermId)
                 .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<PostTerm>()
                 .HasOne(bc => bc.Post)
                 .WithMany(c => c.PostTerms)
                 .HasForeignKey(bc => bc.PostId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<TaxonomyPostType>()
+            .HasKey(tp => new { tp.TaxonomyId, tp.PostTypeId });
+
+            builder.Entity<TaxonomyPostType>()
+                .HasOne(tp => tp.Taxonomy)
+                .WithMany(t => t.TaxonomyPostTypes)
+                .HasForeignKey(tp => tp.TaxonomyId);
+
+            builder.Entity<TaxonomyPostType>()
+                .HasOne(tp => tp.PostType)
+                .WithMany(p => p.TaxonomyPostTypes)
+                .HasForeignKey(pt => pt.PostTypeId);
         }
 
 

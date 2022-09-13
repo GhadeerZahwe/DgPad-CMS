@@ -12,7 +12,7 @@ namespace Common
         public string Name { get; set; }
         public string Code { get; set; }
         public int Sorting { get; set; }
-
+        public ICollection<Term> Terms { get; set; }
         public ICollection<TaxonomyPostType> TaxonomyPostTypes { get; set; }
 
     }

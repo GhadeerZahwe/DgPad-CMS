@@ -15,6 +15,6 @@ namespace Common
         [Required(ErrorMessage = "You must choose a taxonomy")]
         public ICollection<TaxonomyPostType> TaxonomyPostTypes { get; set; } = new HashSet<TaxonomyPostType>();
 
-       
+        public ICollection<Post> Posts { get; set; }
     }
 }

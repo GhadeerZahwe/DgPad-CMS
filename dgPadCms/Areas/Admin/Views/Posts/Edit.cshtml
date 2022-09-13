@@ -1,7 +1,7 @@
 ﻿@model Common.Post
 
 @{
-    ViewData["Title"] = "Edit Post";
+    ViewData["Title"] = "Edit";
 }
 
 <div class="row ">
@@ -15,23 +15,28 @@
     <div class="col-md-10 au-card recent-report">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <input type="hidden" asp-for="Image" />
+            <input type="hidden" asp-for="Id" />
 
-         <input type="hidden" asp-for="Image" />
-
+            <div class="form-group">
+                <label asp-for="PostTypeId" class="control-label">Post Type:</label>
+                <span class="form-control">@ViewBag.PostType.Title</span>
+                <input asp-for="PostTypeId" type="hidden" value="@ViewBag.PostType.Id" />
+            </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+               <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-           
-            <div class="form-group">
+              <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
+                <input asp-for="Date" type="date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Detail" class="control-label"></label>
-               <textarea asp-for="Detail" class="form-control"></textarea>
+                 <textarea asp-for="Detail" class="form-control"></textarea>
                 <span asp-validation-for="Detail" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,10 +44,7 @@
                  <textarea asp-for="Summary" class="form-control"></textarea>
                 <span asp-validation-for="Summary" class="text-danger"></span>
             </div>
-          
-
-            
-            <div class="form-group">
+                <div class="form-group">
                 <label asp-for="Image" class="control-label">Current Image</label>
                 <img src="~/media/posts/@Model.Image" width="200" alt="" />
             </div>
@@ -54,22 +56,20 @@
                 <span asp-validation-for="ImageUpload" class="text-danger"></span>
             </div>
 
-              <div class="form-group">
-                <label asp-for="PostTypeId" class="control-label"></label>
-                <select asp-for="PostTypeId" asp-items="@ViewBag.PostTypeId" class="form-control">
-                    <option value="0">Choose a PostType</option>
-                </select>
-                <span asp-validation-for="PostTypeId" class="text-danger"></span>
-            </div>
-                  <div class="form-group">
-                <label asp-for="PostTerms" class="control-label"></label>
-                <select asp-for="PostTerms" asp-items="@ViewBag.TermId " multiple ="multiple" class="form-control">
-                
-                </select>
-                <span asp-validation-for="PostTerms" class="text-danger"></span>
-            </div>  
             <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary" />
+                <label class="control-label">Terms</label>
+                <select name="termIdList" class="form-control multipleSelect" multiple>
+                    @foreach (var i in ViewBag.Terms)
+                    {
+                        <option value="@i.Id">@i.Name</option>
+                    }
+                </select>
+            </div>
+            <script>
+                $('.multipleSelect').fastselect();
+            </script>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -78,7 +78,6 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -91,4 +90,11 @@
                 readURL(this);
             });
     </script>
+}
+
+
+    @section MultiSelect{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/lib/MultiSelect/fastselect.css">
+    <script src="~/lib/MultiSelect/fastselect.js"></script>
 }

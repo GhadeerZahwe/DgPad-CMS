@@ -4,7 +4,7 @@ namespace Common
 {
     public class TaxonomyPostType
     {
-        public int Id { get; set; }
+      
         public int TaxonomyId { get; set; }
         public int PostTypeId { get; set; }
 

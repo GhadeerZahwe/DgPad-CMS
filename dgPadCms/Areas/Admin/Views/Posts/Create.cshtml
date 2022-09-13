@@ -1,73 +1,92 @@
-﻿@model Common.CreatePostViewModel
+﻿@model Common.Post
 
 @{
     ViewData["Title"] = "Create a Post";
 }
 
 <div class="row ">
-<div class="col-md-10 au-card recent-report">
+<div class="col-md-9 au-card recent-report">
 <h2>Create a Post</h2>
  </div>
  </div>
 
+
+@if ( ViewBag.PostTypeId == null){
+    <table class="col-md-9 au-card recent-report">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.PostType)
+            {
+                <tr>
+                    <td>
+                        @item.Title
+                    </td>
+                    
+                    <td>
+                        <a asp-action="Create" asp-route-postTypeId="@item.Id">Create a Post</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else {
+
 <div class="row">
-    <div class="col-md-10 au-card recent-report">
-        <form asp-action="Create" enctype="multipart/form-data">
+    <div class="col-md-9 au-card recent-report">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
+            <div class="form-group">
+                <label asp-for="PostTypeId" class="control-label">Post Type:</label>
+                    <span class="form-control">@ViewBag.PostType.Title</span>
+                <input asp-for="PostTypeId" type="hidden" value="@ViewBag.PostType.Id" />
+            </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-         
-            <div class="form-group">
+              <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" type="date"  class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
-            <div class="form-group">
+               <div class="form-group">
                 <label asp-for="Detail" class="control-label"></label>
-                <textarea asp-for="Detail" class="form-control"></textarea>
+                <input asp-for="Detail" class="form-control" />
                 <span asp-validation-for="Detail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Summary" class="control-label"></label>
-               <textarea asp-for="Summary" class="form-control"></textarea>
+                <input asp-for="Summary" class="form-control" />
                 <span asp-validation-for="Summary" class="text-danger"></span>
             </div>
-           <div class="form-group">
+                <div class="form-group">
                 <label asp-for="Image" class="control-label">Post Image</label>
                 <input asp-for="ImageUpload" class="form-control" />
                 <img src="" id="imgpreview" class="pt-2" alt="" />
                 <span asp-validation-for="ImageUpload" class="text-danger"></span>
             </div>
 
-             <div class="form-group">
-                <label asp-for="PostTypeId" class="control-label"></label>
-                <select asp-for="PostTypeId" asp-items="@ViewBag.PostTypeId" class="form-control">
-                    <option value="0">Choose a PostType</option>
+            <div class="form-group">
+                <label class="control-label">Terms</label>
+                <select name="termIdList" class="form-control multipleSelect" multiple>
+                    @foreach (var i in ViewBag.Terms){
+                        <option value="@i.Id">@i.Name</option>
+                    }
                 </select>
-                <span asp-validation-for="PostTypeId" class="text-danger"></span>
-            </div> 
-              <div class="form-group">
-                
-                @for(int i=0; i<Model.Terms.Count ;i++)
-                {
-                    <input asp-for="Terms[i].Value" type="hidden" class="form-control" /> 
-                    <input asp-for="Terms[i].Selected" class="form-control" />
-                    @Model.Terms[i].Text 
-                }
-               
             </div>
-           @* <div class="form-group">
-                <label asp-for="PostTerms" class="control-label"></label>
-                <select asp-for="PostTerms" asp-items="@ViewBag.TermId" multiple ="multiple" class="form-control">
-                
-                </select>
-                <span asp-validation-for="PostTerms" class="text-danger"></span>
-            </div>    *@
-
+            <script>
+                $('.multipleSelect').fastselect();
+            </script>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -76,12 +95,12 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" herf="/admin/posttypes">Back to List</a>
 </div>
-
-
+}
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 
     <script>
         CKEDITOR.replace("Detail");
@@ -91,4 +110,10 @@
             readURL(this);
         });
     </script>
+}
+
+@section MultiSelect{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/lib/MultiSelect/fastselect.css">
+    <script src="~/lib/MultiSelect/fastselect.js"></script>
 }
