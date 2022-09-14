@@ -250,4 +250,8 @@
     <None Include="wwwroot\lib\MultiSelect\fastselect.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
 </Project>

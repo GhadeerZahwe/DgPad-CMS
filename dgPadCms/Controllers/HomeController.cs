@@ -1,4 +1,4 @@
-﻿using dgPadCms.Models;
+﻿using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dgPadCms.Controllers
+namespace Common.Controllers
 {
     public class HomeController : Controller
     {

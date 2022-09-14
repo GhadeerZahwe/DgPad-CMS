@@ -1,6 +1,5 @@
-﻿
-using dgPadCms.Data;
-using dgPadCms.Models;
+﻿using Common.Data;
+using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

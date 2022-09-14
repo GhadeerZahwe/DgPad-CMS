@@ -1,5 +1,5 @@
-﻿using dgPadCms.Data;
-using dgPadCms.Models;
+﻿using Common.Data;
+using Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
