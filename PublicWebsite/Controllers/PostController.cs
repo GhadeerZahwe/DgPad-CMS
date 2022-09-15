@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using Common.Data;
+using Common.Models;
 
 namespace PublicWebsite.Controllers
 {
@@ -15,7 +16,26 @@ namespace PublicWebsite.Controllers
         public PostController(ApplicationDbContext context)
         {
             this.context = context;
+        }
 
+
+        // GET /admin/posts
+        public async Task<IActionResult> Index()
+        {
+            var posts = await context.Posts.OrderByDescending(p => p.PostId).Include(x => x.PostType).ToListAsync();
+            return View(posts);
+        }
+
+        // GET /admin/posts/details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            Post post = await context.Posts.Include(x => x.PostType).Include(x => x.PostTerms).FirstOrDefaultAsync(x => x.PostId == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
         }
         ////Just List Posts
         //public IActionResult Index()

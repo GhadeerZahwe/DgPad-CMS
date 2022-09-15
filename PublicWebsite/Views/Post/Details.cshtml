@@ -1,0 +1,47 @@
+﻿@model Common.Models.Post
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row ">
+<div class="col-md-5 au-card recent-report">
+<h2>Details</h2>
+ </div>
+ </div>
+     </div>
+        <center> 
+       
+            
+                <div class="row" style="margin:30px" >
+                <div class="col-12"> 
+        <img src="~/img/slide/3.jpg" class="img-fluid" style="height:300px; width:300px; border-radius:50%"  alt="">
+            </div>
+                <div class="col-sm=12">
+                    <h3> Title: @Model.PostTitle</h3>
+                    <h4>@Model.CreationDate</h4>
+                    <p class="fst-italic">
+                        Summary: @Html.Raw(Model.Summary)
+                    </p><p class="fst-italic">
+                      Details:  @Html.Raw(Model.Details)
+                    </p>  
+                    <p class="fst-italic">
+                       PostType Title: @Model.PostType.Title
+                    </p>  <a asp-action="Index">Back to List</a>
+                </div>
+                </div>
+              
+       
+        </center>
+    </div>
+   
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+            CKEDITOR.replace("Details");
+            CKEDITOR.replace("Summary");
+
+    </script>
+}
