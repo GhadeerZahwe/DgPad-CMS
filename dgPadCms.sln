@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dgPadCms", "dgPadCms\dgPadCms.csproj", "{607EA267-AEA5-4E0B-9F8E-708DB3E4EC4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B7434A5D-B8A7-409F-A7B7-6C852E128DC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{B7434A5D-B8A7-409F-A7B7-6C852E128DC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicWebsite", "PublicWebsite\PublicWebsite.csproj", "{6C42C173-C2C3-443F-A969-D4B8E93170F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B7434A5D-B8A7-409F-A7B7-6C852E128DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7434A5D-B8A7-409F-A7B7-6C852E128DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7434A5D-B8A7-409F-A7B7-6C852E128DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C42C173-C2C3-443F-A969-D4B8E93170F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C42C173-C2C3-443F-A969-D4B8E93170F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C42C173-C2C3-443F-A969-D4B8E93170F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C42C173-C2C3-443F-A969-D4B8E93170F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
