@@ -4,37 +4,47 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="row ">
-<div class="col-md-5 au-card recent-report">
-<h2>Details</h2>
- </div>
- </div>
-     </div>
-        <center> 
-       
-            
-                <div class="row" style="margin:30px" >
-                <div class="col-12"> 
-        <img src="~/img/slide/3.jpg" class="img-fluid" style="height:300px; width:300px; border-radius:50%"  alt="">
-            </div>
-                <div class="col-sm=12">
-                    <h3> Title: @Model.PostTitle</h3>
-                    <h4>@Model.CreationDate</h4>
-                    <p class="fst-italic">
-                        Summary: @Html.Raw(Model.Summary)
-                    </p><p class="fst-italic">
-                      Details:  @Html.Raw(Model.Details)
-                    </p>  
-                    <p class="fst-italic">
-                       PostType Title: @Model.PostType.Title
-                    </p>  <a asp-action="Index">Back to List</a>
-                </div>
-                </div>
-              
-       
-        </center>
-    </div>
-   
+<h1>Details</h1>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>   
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+        <dd class = "col-sm-10">
+           @Html.Raw(Model.Summary) 
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+        <dd class = "col-sm-10">
+           @Html.Raw(Model.Details) 
+        </dd>
+    
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostType.Title)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

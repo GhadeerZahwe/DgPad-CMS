@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Post\Details.cshtml" />
     <Content Remove="wwwroot\css\style.css" />
     <Content Remove="wwwroot\css\style.min.css" />
     <Content Remove="wwwroot\img\ads-700x70.jpg" />
@@ -165,7 +164,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Post\Details.cshtml" />
     <None Include="wwwroot\css\style.css" />
     <None Include="wwwroot\css\style.min.css" />
     <None Include="wwwroot\img\ads-700x70.jpg" />

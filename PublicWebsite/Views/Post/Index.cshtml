@@ -2,14 +2,19 @@
 
 @{
     ViewData["Title"] = "Post";
+    var myPosts = Model.ToList();
 }
- @foreach (var item in Model)
-  {
+
+ @for (var i = 0; i < myPosts.Count; i=i+2)
+ {
       <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 py-3">
-                    <div class="bg-light py-2 px-4 mb-3">
+                @for(var k = i; k<i+2 && k<myPosts.Count; k++)
+                {
+                    var item = myPosts.ElementAt(k);
+                    <div class="col-lg-6 py-3">
+                        <div class="bg-light py-2 px-4 mb-3">
                         <h3 class="m-0">@item.PostType.Title </h3>
                     </div>
                     <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
@@ -37,7 +42,7 @@
 								   <a  asp-action="Details" asp-route-id="@item.PostId">Details</a> 
                             </div>
                         </div> 
-                        <div class="position-relative">
+                       @* <div class="position-relative">
                             <img class="img-fluid w-100"  src="~/img/slide/3.jpg" style="object-fit: cover;">
                             <div class="overlay position-relative bg-light">
                                 <div class="mb-2" style="font-size: 13px;">
@@ -48,10 +53,11 @@
                                 <a class="h4 m-0" href="">@Html.Raw(item.Summary) </a>
 								   <a  asp-action="Details" asp-route-id="@item.PostId">Details</a> 
                             </div>
-                        </div>
+                        </div>*@
                         
                     </div>
                 </div>
+                }
             </div>
         </div>
     </div>
