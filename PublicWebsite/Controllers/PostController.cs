@@ -37,6 +37,15 @@ namespace PublicWebsite.Controllers
 
             return View(post);
         }
+
+        // GET /terms
+        public async Task<IActionResult> Term()
+        {
+
+            var terms = await context.PostTerms.OrderByDescending(t => t.TermId).Include(t => t.PostId).ToListAsync();
+
+            return View(terms);
+        }
         ////Just List Posts
         //public IActionResult Index()
         //{
