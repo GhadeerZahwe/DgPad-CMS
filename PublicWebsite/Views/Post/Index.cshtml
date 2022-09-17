@@ -2,63 +2,96 @@
 
 @{
     ViewData["Title"] = "Post";
-    var myPosts = Model.ToList();
-}
-
- @for (var i = 0; i < myPosts.Count; i=i+2)
- {
-      <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                @for(var k = i; k<i+2 && k<myPosts.Count; k++)
-                {
-                    var item = myPosts.ElementAt(k);
-                    <div class="col-lg-6 py-3">
-                        <div class="bg-light py-2 px-4 mb-3">
-                        <h3 class="m-0">@item.PostType.Title </h3>
+    
+}@*
+            <div class="col-lg-6 py-3">
+                    <div class="bg-light py-2 px-4 mb-3">
+                                     @foreach(Term tt in ViewBag.Term)
+                      {
+                         <h3 class="m-0"> @tt.Name </h3>
+                     }
                     </div>
-                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
-                        <div class="position-relative">
-                            <img class="img-fluid w-100" src="~/img/slide/2.jpg"  style="object-fit: cover;">
+                      @foreach (var item in Model)
+              
+                {
+                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(-720px, 0px, 0px); transition: all 0s ease 0s; width: 2520px;">
+                        <div class="owl-item cloned" style="width: 330px; margin-right: 30px;">
+                            <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/slide/1.jpg" style="object-fit: cover;">
                             <div class="overlay position-relative bg-light">
                                 <div class="mb-2" style="font-size: 13px;">
-                                    <a href=""> @item.PostTitle</a>
+                                    <a href=""> @item.PostType.Title</a>
                                     <span class="px-1">/</span>
                                     <span>@item.CreationDate</span>
                                 </div>
-                                <a class="h4 m-0" href="">@Html.Raw(item.Summary) </a>
+                                
+                            </div><a class="h4 m-0" href="">@item.PostTitle</a>
+                            
+								   <a  asp-action="Details" asp-route-id="@item.PostId">Details</a> 
+                        </div>
+                  
+                        </div>
+                   
+                   </div>
+                   </div>
+           </div>
+                }
+             </div> 
+             
+*@
+
+ <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 py-3">
+                    <div class="bg-light py-2 px-4 mb-3">
+                        <h3 class="m-0">Business</h3>
+                    </div>
+                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                                 @foreach (var item in Model.Take(3))
+              
+                { 
+                    <div class="position-relative" >
+                            <img class="img-fluid w-100" src="img/news-500x280-1.jpg" style="object-fit: cover;">
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 13px;">
+                                    <a href=""> @item.PostType.Title</a>
+                                    <span class="px-1"></span>
+                                     <span>@item.CreationDate</span>
+                                </div>
+                              <a class="h4 m-0" style="height:90px" href="">@item.PostTitle</a>
+                            
 								   <a  asp-action="Details" asp-route-id="@item.PostId">Details</a> 
                             </div>
                         </div>
-                        <div class="position-relative">
-                            <img class="img-fluid w-100"  src="~/img/slide/5.jpg" style="object-fit: cover;">
-                            <div class="overlay position-relative bg-light">
-                                <div class="mb-2" style="font-size: 13px;">
-                                    <a href=""> @item.PostTitle</a>
-                                    <span class="px-1">/</span>
-                                    <span>@item.CreationDate</span>
-                                </div>
-                                <a class="h4 m-0" href="">@Html.Raw(item.Summary) </a>
-								   <a  asp-action="Details" asp-route-id="@item.PostId">Details</a> 
-                            </div>
-                        </div> 
-                       @* <div class="position-relative">
-                            <img class="img-fluid w-100"  src="~/img/slide/3.jpg" style="object-fit: cover;">
-                            <div class="overlay position-relative bg-light">
-                                <div class="mb-2" style="font-size: 13px;">
-                                    <a href=""> @item.PostTitle</a>
-                                    <span class="px-1">/</span>
-                                    <span>@item.CreationDate</span>
-                                </div>
-                                <a class="h4 m-0" href="">@Html.Raw(item.Summary) </a>
-								   <a  asp-action="Details" asp-route-id="@item.PostId">Details</a> 
-                            </div>
-                        </div>*@
-                        
+
+                }
+                       
+                       
                     </div>
                 </div>
-                }
+                <div class="col-lg-6 py-3">
+                    <div class="bg-light py-2 px-4 mb-3">
+                        <h3 class="m-0">Technology</h3>
+                    </div>
+                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="img/news-500x280-4.jpg" style="object-fit: cover;">
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 13px;">
+                                    <a href="">Technology</a>
+                                    <span class="px-1">/</span>
+                                    <span>January 01, 2045</span>
+                                </div>
+                                <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
+                            </div>
+                        </div>
+                  
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-	}
+    </div>
