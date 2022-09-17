@@ -17,11 +17,6 @@ editors can use these systems to create, edit, organize, and publish content.
 >>When pressing on Tables, the available tables (Taxonomies, Terms, PostTypes and Posts) will be shown in the form
 of a list as the following layout:
 ![image](https://user-images.githubusercontent.com/88279980/188481211-f0cb5223-5373-47c6-a0a0-6e2a379b2ad8.png)
->>In the admin area, we can observer a controller for each of these tables. Each controller contains some
-actions like Create, Edit,Details and Delete. In addition to the views part that contains the .cshtml files 
-for each of these actions.
-![image](https://user-images.githubusercontent.com/88279980/188485814-4749783f-73f0-4ad5-aee5-e7ef9941d805.png)
-![image](https://user-images.githubusercontent.com/88279980/188485898-698fe3e6-68b4-4cb7-83e2-337d61dcb5c8.png)
 
 >>Each table contains the crud operations. Below there are some screenshots of each table.
 >>Table of Taxonomies: 
