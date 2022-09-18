@@ -23,7 +23,7 @@ namespace PublicWebsite.Controllers
         public async Task<IActionResult> Index()
         {
             var t = context.Terms.Where(x => x.TermId != null);
-            List<PostTerm> postterms = new List<PostTerm>();
+
             List<Term> terms = new List<Term>();
             foreach (Term item in t)
             {
@@ -39,6 +39,8 @@ namespace PublicWebsite.Controllers
                      });
             }
             ViewBag.Term = terms;
+            var postTypes = await context.PostTypes.ToListAsync();
+            ViewBag.postTypes = postTypes;
 
             var posts = await context.Posts.OrderByDescending(p => p.PostId).Include(x => x.PostType).ToListAsync();
             return View(posts);
@@ -52,8 +54,67 @@ namespace PublicWebsite.Controllers
             {
                 return NotFound();
             }
+            var t = context.Terms.Where(x => x.TermId != null);
+            List<Term> terms = new List<Term>();
+            foreach (Term item in t)
+            {
+                int termId = item.TermId;
+                Term Trm = context.Terms.First(p => p.TermId == termId);
+
+                terms.Add(new Term
+                {
+                    TermId = Trm.TermId,
+                    Name = Trm.Name,
+                    Code = Trm.Code
+
+                });
+            }
+            ViewBag.Term = terms;
+            var postTypes = await context.PostTypes.ToListAsync();
+            ViewBag.postTypes = postTypes;
 
             return View(post);
+        }
+
+        // GET /admin/posts/terms/5
+        public async Task<IActionResult> Terms(int id)
+        {
+            var t = context.Terms.Where(x => x.TermId != null);
+
+            List<Term> terms = new List<Term>();
+            foreach (Term item in t)
+            {
+                int termId = item.TermId;
+                Term Trm = context.Terms.First(p => p.TermId == termId);
+
+                terms.Add(new Term
+                {
+                    TermId = Trm.TermId,
+                    Name = Trm.Name,
+                    Code = Trm.Code
+
+                });
+            }
+            ViewBag.Term = terms;
+            var postTypes = await context.PostTypes.ToListAsync();
+            ViewBag.postTypes = postTypes;
+            var posts = await context.PostTerms
+                .Where(t => t.TermId == id)
+                .Include(p => p.Post)
+                .Include(pt => pt.Post.PostType)
+                .Select(x => new Post
+                {
+                    PostId = x.Post.PostId,
+                    PostTitle = x.Post.PostTitle,
+                    PostTypeId = x.Post.PostTypeId,
+                    CreationDate = x.Post.CreationDate,
+                    Details = x.Post.Details,
+                    Summary = x.Post.Summary,
+                    PostType = x.Post.PostType
+                })
+                .OrderByDescending(p => p.PostId).ToListAsync();
+
+            return View("Index", posts);
         }
 
         //// GET /terms
@@ -105,12 +166,12 @@ namespace PublicWebsite.Controllers
 
         //}
 
-//        //Inviews
-//        Foreach(PostType pp in ViewBag.PostType)
-//        {
-//            Pp.Name;
-//            Pp.Id
-//}
+        //        //Inviews
+        //        Foreach(PostType pp in ViewBag.PostType)
+        //        {
+        //            Pp.Name;
+        //            Pp.Id
+        //}
 
     }
 }
