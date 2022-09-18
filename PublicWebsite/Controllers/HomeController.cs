@@ -6,22 +6,48 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Common.Data;
 
 namespace PublicWebsite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        readonly ApplicationDbContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            db = context;
         }
+
 
         public IActionResult Index()
         {
             return View();
         }
+        public IActionResult Messages()
+        {
+
+            return View(db.Contacts.ToList());
+        }
+
+        public IActionResult Contact()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SaveContact(ContactUS model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Contacts.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View("Contact", model);
+        }
+
 
         public IActionResult Privacy()
         {

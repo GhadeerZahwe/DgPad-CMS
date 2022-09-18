@@ -67,5 +67,6 @@ namespace Common.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<TaxonomyPostType> TaxonomyPostTypes { get; set; }
         public DbSet<PostTerm> PostTerms { get; set; }
+        public DbSet<ContactUS> Contacts { get; set; }
     }
 }

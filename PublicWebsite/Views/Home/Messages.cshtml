@@ -1,0 +1,38 @@
+﻿@model List<ContactUS>
+
+<section id="testimonials" class="testimonials">
+      <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Users' opinions</h2>
+        </div>
+        <center>
+       
+            @foreach (var item in Model)
+           {<div class="swiper-slide swiper-slide-next col-8" role="group" >
+            
+               <div class="testimonial-item">
+                 <p style="font-size:30px" >@item.Subject</p>
+                 <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                 @item.Message
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+               <img src="~/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <h3> @item.Name</h3>
+                <h4>@item.Email</h4>
+              </div>
+            </div>
+           <hr/>
+           }
+      
+        </center>
+           
+        </div>
+          
+          <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 3" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+
+
+
+    </section>
