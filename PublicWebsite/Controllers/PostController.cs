@@ -117,6 +117,37 @@ namespace PublicWebsite.Controllers
             return View("Index", posts);
         }
 
+
+        // GET /admin/posts/posttypes/5
+        public async Task<IActionResult> PostTypes(int id)
+        {
+            var t = context.Terms.Where(x => x.TermId != null);
+
+            List<Term> terms = new List<Term>();
+            foreach (Term item in t)
+            {
+                int termId = item.TermId;
+                Term Trm = context.Terms.First(p => p.TermId == termId);
+
+                terms.Add(new Term
+                {
+                    TermId = Trm.TermId,
+                    Name = Trm.Name,
+                    Code = Trm.Code
+
+                });
+            }
+            ViewBag.Term = terms;
+            var postTypes = await context.PostTypes.ToListAsync();
+            ViewBag.postTypes = postTypes;
+            var posts = await context.Posts
+                .Where(t => t.PostTypeId == id)
+                .Include(pt => pt.PostType)
+                .OrderByDescending(p => p.PostId).ToListAsync();
+
+            return View("Index", posts);
+        }
+
         //// GET /terms
         //public async Task<IActionResult> Term(int? TermId = null)
         //{

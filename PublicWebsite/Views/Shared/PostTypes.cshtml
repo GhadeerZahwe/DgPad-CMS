@@ -5,6 +5,7 @@
                 <div class="d-flex flex-wrap m-n1">
                      @foreach (var item in @ViewBag.postTypes)
         {
+
               <a asp-action="PostTypes" asp-route-id="@item.PostTypeId" class="btn btn-sm btn-outline-secondary m-1"> @item.Title</a>
         }
       

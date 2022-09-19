@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Common.Infrastructure;
 
 namespace Common.Models
 {
@@ -17,9 +19,15 @@ namespace Common.Models
 
         public string Summary { get; set; }
 
+        public string Image { get; set; }
+
         public PostType PostType { get; set; }
 
         public ICollection<PostTerm> PostTerms { get; set; }
+
+        [NotMapped]
+        [FileExtention]
+        public IFormFile ImageUpload { get; set; }
 
     }
 }
