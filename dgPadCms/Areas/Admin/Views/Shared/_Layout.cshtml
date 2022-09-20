@@ -197,15 +197,16 @@
                                 <i class="far fa-check-square"></i>Set Roles</a>
                         </li> 
                         
-                        <li>
+                   @*     <li>
                             <a href="~/Admin/Roles/UserRoles">
                                 <i class="far fa-check-square"></i>Logout</a>
-                        </li>
-              @*          <li > 
+                        </li>*@
+                     <li > 
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button  type="submit"><i class="far fa-check-square"></i> Logout</button>
+            </form>
     </li>
-                   *@     
+                    
                         </li>
                     </ul>
                 </nav>
