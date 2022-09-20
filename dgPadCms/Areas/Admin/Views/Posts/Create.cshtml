@@ -60,6 +60,7 @@ else {
                 <input asp-for="CreationDate"   type="date" class="form-control" />
                 <span asp-validation-for="CreationDate" class="text-danger"></span>
             </div>
+           
       <div class="form-group">
                 <label asp-for="Details" class="control-label"></label>
                  <textarea asp-for="Details" class="form-control"></textarea>
@@ -70,7 +71,13 @@ else {
                  <textarea asp-for="Summary" class="form-control"></textarea>
                 <span asp-validation-for="Summary" class="text-danger"></span>
             </div>
-
+            
+            <div class="form-group pb-2">
+                <label asp-for="Image" class="control-label">Post Image</label>
+                <input asp-for="ImageUpload" class="form-control" />
+                <img src="" id="imgPreview" class="pt-2" alt="" />
+                <span asp-validation-for="ImageUpload" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label class="control-label">Terms</label>
                 <select name="termIdList" class="form-control multipleSelect" multiple>
@@ -79,9 +86,12 @@ else {
                     }
                 </select>
             </div>
-            <script>
-                $('.multipleSelect').fastselect();
-            </script>
+            
+                <script>
+                    $('.multipleSelect').fastselect();
+                </script>
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -94,22 +104,21 @@ else {
 </div>
 }
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script>
-            CKEDITOR.replace("Details");
-            CKEDITOR.replace("Summary");
-
-            $("#ImageUpload").change(function () {
-                readURL(this);
-            });
-    </script>
+ <script>
+        CKEDITOR.replace("Details")
+        CKEDITOR.replace("Summary")
+ </script>
 }
-
-    @section MultiSelect{
+@section MultiSelect{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="~/lib/MultiSelect/fastselect.css">
     <script src="~/lib/MultiSelect/fastselect.js"></script>
 }
+<script>
+    $("#ImageUpload").change(function () {
+        readURL(this);
+    });
+</script>
+

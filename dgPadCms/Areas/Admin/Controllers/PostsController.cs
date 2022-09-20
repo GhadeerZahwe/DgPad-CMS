@@ -1,7 +1,6 @@
 ﻿
-using Common.Models;
 using Common.Data;
-using Common.Models.ViewModels;
+using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace dgPadCms.Areas.Admin.Controllers
 {
@@ -17,10 +18,13 @@ namespace dgPadCms.Areas.Admin.Controllers
     public class PostsController : Controller
     {
         private readonly ApplicationDbContext context;
-        public PostsController(ApplicationDbContext context)
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public PostsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             this.context = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
+
 
 
         // GET /admin/posts
@@ -29,6 +33,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             var posts = await context.Posts.OrderByDescending(p => p.PostId).Include(x => x.PostType).ToListAsync();
             return View(posts);
         }
+
 
         // GET /admin/posts/create
         public async Task<ActionResult> Create(int? postTypeId = null)
@@ -42,7 +47,7 @@ namespace dgPadCms.Areas.Admin.Controllers
 
             var postType = await context.PostTypes.FindAsync(postTypeId);
             ViewBag.PostType = postType;
-            
+
             var postTypesTaxonomies = await context.TaxonomyPostTypes
                 .Where(x => x.PostTypeId == postTypeId)
                 .ToListAsync();
@@ -61,7 +66,7 @@ namespace dgPadCms.Areas.Admin.Controllers
             ViewBag.Terms = terms;
 
 
-                return View();
+            return View();
         }
 
         // POST /admin/posts/create
@@ -70,6 +75,19 @@ namespace dgPadCms.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Post post, List<int> termIdList)
         {
             post.CreationDate = DateTime.Now.ToString("dd/MM/yyyy h:mm tt");
+
+            string imageName = "noimage.png";
+            if (post.ImageUpload != null)
+            {
+                string uploadsDir = Path.Combine(webHostEnvironment.WebRootPath, "media/posts");
+                imageName = Guid.NewGuid().ToString() + "_" + post.ImageUpload.FileName;
+                string filePath = Path.Combine(uploadsDir, imageName);
+                FileStream fs = new FileStream(filePath, FileMode.Create);
+                await post.ImageUpload.CopyToAsync(fs);
+                fs.Close();
+            }
+
+            post.Image = imageName;
 
             context.Add(post);
             await context.SaveChangesAsync();
@@ -117,12 +135,34 @@ namespace dgPadCms.Areas.Admin.Controllers
             return View(post);
         }
 
+
         // POST /admin/posts/edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Post post, List<int> termIdList)
         {
-            post.CreationDate = DateTime.Now.ToString("dd/MM/yyyy h:mm tt") + " edited";
+            post.CreationDate = DateTime.Now.ToString("dd/MM/yyyy h:mm tt") + " (edited)";
+
+            if (post.ImageUpload != null)
+            {
+                string uploadsDir = Path.Combine(webHostEnvironment.WebRootPath, "media/posts");
+
+                if (!string.Equals(post.Image, "noimage.png"))
+                {
+                    string oldImagePath = Path.Combine(uploadsDir, post.Image);
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+
+                }
+                string imageName = Guid.NewGuid().ToString() + "_" + post.ImageUpload.FileName;
+                string filePath = Path.Combine(uploadsDir, imageName);
+                FileStream fs = new FileStream(filePath, FileMode.Create);
+                await post.ImageUpload.CopyToAsync(fs);
+                fs.Close();
+                post.Image = imageName;
+            }
 
             context.Update(post);
             await context.SaveChangesAsync();

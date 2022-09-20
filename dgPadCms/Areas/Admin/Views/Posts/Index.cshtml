@@ -17,15 +17,17 @@
             </th>
          @*   <th>
                 CreationDate
-            </th>
-            <th>
-                Details
-            </th>*@
-       @*     <th >
+            </th>*@  
+         @*   <th>
                 Summary
             </th>*@
+         
+        
             <th>
                 PostType
+            </th> 
+            <th>
+                Image
             </th>
             <th></th>
         </tr>
@@ -41,13 +43,18 @@
             </td>
             <td>
                 @Html.Raw(item.Details)
-            </td>*@
-          @*  <td  >
+            </td>*@    
+           @* <td>
              @Html.Raw(item.Summary)
             </td>*@
             <td>
                 @item.PostType.Title
             </td>
+             <td>
+                <img src="~/media/posts/@item.Image" width="100px" />
+            </td>
+       
+            
             <td>
                 <a asp-action="Edit" asp-route-postId="@item.PostId" asp-route-postTypeId="@item.PostType.PostTypeId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PostId">Details</a> |
