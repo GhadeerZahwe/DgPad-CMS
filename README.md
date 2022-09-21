@@ -55,23 +55,18 @@ of a list as the following layout:
 ![image](https://user-images.githubusercontent.com/88279980/188484863-a0bd337b-6f3e-4cc0-957f-3f390e4c6fee.png)
 ![image](https://user-images.githubusercontent.com/88279980/188484905-43f22bd8-e247-4125-b7e7-6750a795b505.png)
 
->>Show Users' Messages:
->>![image](https://user-images.githubusercontent.com/88279980/191498294-4ecc96a0-577b-4bc8-ae4f-8496d5568c12.png)
 
 ============================================================================================
                                         Public Website
                                         
-===========================================================================================
+============================================================================================
                                           Description
-                                          
-==========================================================================================
+============================================================================================
 This website is created for the online users because they are not allowed to read articles from 
 the admin panel since it is security issue so they can browser articles without the need to login.
 They can only read, no creations or updates are allowed. 
-
 ============================================================================================
                                           Screenshots
-                                          
 ============================================================================================
 
 ![image](https://user-images.githubusercontent.com/88279980/191243892-bbe008c1-94bb-41c9-910d-a35b07328485.png)
@@ -82,7 +77,10 @@ They can only read, no creations or updates are allowed.
 ![image](https://user-images.githubusercontent.com/88279980/191244178-046da823-4a19-436c-ba9f-eb0b04ad5148.png)
 ![image](https://user-images.githubusercontent.com/88279980/191244194-a78871d4-0103-41b8-88f9-0ef0da88cf2e.png)
 ![image](https://user-images.githubusercontent.com/88279980/191244235-32f3104e-5a99-455d-a3de-dad5c505fe8b.png)
-![image](https://user-images.githubusercontent.com/88279980/191497932-04e1dd98-3e56-4b8a-9241-5cf04db00ac6.png)
+![image](https://user-images.githubusercontent.com/88279980/191244260-b3c41427-43f3-4dca-979e-a51d2a9a503d.png)
+![image](https://user-images.githubusercontent.com/88279980/191244279-373fc1b5-ec94-4c39-bace-9f37e26da593.png)
+![image](https://user-images.githubusercontent.com/88279980/191498601-37336fa8-1b70-48bc-b68d-3aaf6993ae96.png)
+
 
 
 
