@@ -19,8 +19,7 @@ namespace PublicWebsite.Controllers
         {
             this.context = context;
         }
-
-
+       
         public async Task<IActionResult> Index()
         {
             var t = context.Terms.Where(x => x.TermId != null);

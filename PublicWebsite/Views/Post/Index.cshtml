@@ -46,8 +46,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 py-3">
-                    <div class="bg-light py-2 px-4 mb-3">
-                        <h3 class="m-0">Business</h3>
+                      <div class="bg-light py-2 px-4 mb-3">
+                         @foreach(Term tt in ViewBag.Term)
+                      {
+                         <h3 class="m-0"> @tt.Name </h3>
+                     }
                     </div>
                     <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
                                  @foreach (var item in Model.Take(3))

@@ -110,6 +110,7 @@ namespace PublicWebsite.Controllers
                     CreationDate = x.Post.CreationDate,
                     Details = x.Post.Details,
                     Summary = x.Post.Summary,
+                    Image=x.Post.Image,
                     PostType = x.Post.PostType
                 })
                 .OrderByDescending(p => p.PostId).ToListAsync();
