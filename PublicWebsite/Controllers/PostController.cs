@@ -39,6 +39,7 @@ namespace PublicWebsite.Controllers
                      });
             }
             ViewBag.Term = terms;
+            ViewBag.MyTerm = terms;
             var postTypes = await context.PostTypes.ToListAsync();
             ViewBag.postTypes = postTypes;
 
@@ -70,6 +71,7 @@ namespace PublicWebsite.Controllers
                 });
             }
             ViewBag.Term = terms;
+            ViewBag.MyTerm = terms;
             var postTypes = await context.PostTypes.ToListAsync();
             ViewBag.postTypes = postTypes;
 
@@ -79,7 +81,8 @@ namespace PublicWebsite.Controllers
         // GET /admin/posts/terms/5
         public async Task<IActionResult> Terms(int id)
         {
-            var t = context.Terms.Where(x => x.TermId != null);
+            var t = context.Terms.
+                Where(x => x.TermId != null);
 
             List<Term> terms = new List<Term>();
             foreach (Term item in t)
@@ -96,12 +99,32 @@ namespace PublicWebsite.Controllers
                 });
             }
             ViewBag.Term = terms;
+
+            var tt = context.Terms.
+            Where(x => x.TermId == id);
+
+            List<Term> tterms = new List<Term>();
+            foreach (Term item in tt)
+            {
+                int termId = item.TermId;
+                Term Trm = context.Terms.First(p => p.TermId == termId);
+
+                tterms.Add(new Term
+                {
+                    TermId = Trm.TermId,
+                    Name = Trm.Name,
+                    Code = Trm.Code
+
+                });
+            }
+            ViewBag.MyTerm = tterms;
             var postTypes = await context.PostTypes.ToListAsync();
             ViewBag.postTypes = postTypes;
             var posts = await context.PostTerms
                 .Where(t => t.TermId == id)
                 .Include(p => p.Post)
                 .Include(pt => pt.Post.PostType)
+                .Include(pt => pt.Post.PostTerms)
                 .Select(x => new Post
                 {
                     PostId = x.Post.PostId,
@@ -110,10 +133,14 @@ namespace PublicWebsite.Controllers
                     CreationDate = x.Post.CreationDate,
                     Details = x.Post.Details,
                     Summary = x.Post.Summary,
-                    Image=x.Post.Image,
-                    PostType = x.Post.PostType
+                    Image = x.Post.Image,
+                    PostType = x.Post.PostType,
+                    PostTerms = x.Post.PostTerms
                 })
-                .OrderByDescending(p => p.PostId).ToListAsync();
+                .Where(p => p.PostTerms.Count() == 1)
+                .OrderByDescending(p => p.PostId)
+                .ToListAsync();
+
 
             return View("Index", posts);
         }
@@ -139,6 +166,7 @@ namespace PublicWebsite.Controllers
                 });
             }
             ViewBag.Term = terms;
+            ViewBag.MyTerm = terms;
             var postTypes = await context.PostTypes.ToListAsync();
             ViewBag.postTypes = postTypes;
             var posts = await context.Posts

@@ -41,6 +41,7 @@ namespace dgPadCms.Areas.Admin.Controllers
                 });
             }
             ViewBag.Term = terms;
+            ViewBag.MyTerm = terms;
             var postTypes = await context.PostTypes.ToListAsync();
             ViewBag.postTypes = postTypes;
             return View();
@@ -64,6 +65,7 @@ namespace dgPadCms.Areas.Admin.Controllers
                 });
             }
             ViewBag.Term = terms;
+            ViewBag.MyTerm = terms;
             var postTypes = await context.PostTypes.ToListAsync();
             ViewBag.postTypes = postTypes;
             return View(context.Contacts.ToList());
