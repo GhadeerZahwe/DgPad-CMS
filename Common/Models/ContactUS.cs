@@ -6,6 +6,7 @@ namespace Common.Models
 
     public class ContactUS
     {
+        //
         public int Id { get; set; }
         [Required]
         [MinLength(5)]
