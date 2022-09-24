@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using Common.Data;
 using Common.Models;
-using dgPadPosts.Models;
 
 namespace PublicWebsite.Controllers
 {
