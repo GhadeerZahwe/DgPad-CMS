@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Common.Data;
 using Common.Models;
+using dgPadPosts.Models;
 
 namespace PublicWebsite.Controllers
 {
@@ -28,22 +29,25 @@ namespace PublicWebsite.Controllers
             foreach (Term item in t)
             {
                 int termId = item.TermId;
-                Term Trm= context.Terms.First(p => p.TermId == termId);
+                Term Trm = context.Terms.First(p => p.TermId == termId);
 
                 terms.Add(new Term
-             {
-                  TermId = Trm.TermId,
-                  Name=Trm.Name,
-                  Code=Trm.Code
+                {
+                    TermId = Trm.TermId,
+                    Name = Trm.Name,
+                    Code = Trm.Code
 
-                     });
+                });
             }
             ViewBag.Term = terms;
             ViewBag.MyTerm = terms;
             var postTypes = await context.PostTypes.ToListAsync();
             ViewBag.postTypes = postTypes;
 
-            var posts = await context.Posts.OrderByDescending(p => p.PostId).Include(x => x.PostType).ToListAsync();
+            var posts = await context.Posts.OrderByDescending(p => p.PostId)
+                .Include(x => x.PostType)
+                .Include(x => x.PostTerms)
+                .ToListAsync();
             return View(posts);
         }
 
@@ -172,66 +176,47 @@ namespace PublicWebsite.Controllers
             var posts = await context.Posts
                 .Where(t => t.PostTypeId == id)
                 .Include(pt => pt.PostType)
+                .Include(x => x.PostTerms)
                 .OrderByDescending(p => p.PostId).ToListAsync();
 
             return View("Index", posts);
         }
-
-        //// GET /terms
-        //public async Task<IActionResult> Term(int? TermId = null)
-        //{
-        //    ViewBag.TermId = TermId;
-        //    if (!TermId.HasValue)
-        //    {
-        //        ViewBag.PostTerms = await context.PostTerms.ToListAsync();
-        //        return View();
-        //    }
-        //    var post = await context.Posts.FindAsync(TermId);
-        //    ViewBag.Post = post;
-        //    //var terms = await context.PostTerms.OrderByDescending(t => t.TermId).Include(t => t.PostId).ToListAsync();
-
-        //    return View();
-        //}
-
-        ////Just List Posts
-        //public async Task<IActionResult> Index()
-        //{
-        //    var postype_tar = services.CheckPostType();
-        //    var target_tar = services.CheckAllTerm();
-        //    List<PostType> ptypes = new List<PostType>();
-
-
-        //    foreach (PostType i in postype_tar)
-        //    {
-        //        int pid = i.PostTypeId;
-
-        //        PostType ptype = services.getPostTypeId(pid);
-
-        //        ptypes.Add(new PostType
-        //        {
-        //            Title = ptype.Title,
-        //            PostTypeId = ptype.PostTypeId,
-        //            TaxonomyId = ptype.TaxonomyId
-
-        //        });
-
-        //    }
-        //    ViewBag.Ptypes = ptypes;
-
-
-        //    var pos = services.OrderPost();
-
-        //    return View(pos.ToList());
-
-
-        //}
-
-        //        //Inviews
-        //        Foreach(PostType pp in ViewBag.PostType)
-        //        {
-        //            Pp.Name;
-        //            Pp.Id
-        //}
-
     }
 }
+
+        //public async Task<IActionResult> PostType(int id)
+        //{
+
+        //    var postType = await context.PostTypes.FindAsync(id);
+
+        //    var postTypesTaxonomies = await context.TaxonomyPostTypes
+        //        .Where(x => x.PostTypeId == id)
+        //        .ToListAsync();
+
+        //    List<int> taxonomiesId = new List<int>();
+
+        //    foreach (var i in postTypesTaxonomies)
+        //    {
+        //        taxonomiesId.Add(i.TaxonomyId);
+        //    }
+
+        //    var terms = await context.Terms
+        //        .Where(x => taxonomiesId.Contains(x.TaxonomyId))
+        //        .ToListAsync();
+
+        //    return View(new PostTypesViewModel()
+        //    {
+        //        posts = await context.Posts
+        //        .Where(x => x.PostTypeId == id)
+        //        .OrderByDescending(x => x.PostId)
+        //        .ToListAsync(),
+        //        postType = postType,
+        //        terms = terms,
+        //        postTypes = await context.PostTypes
+        //        .OrderByDescending(x => x.PostTypeId)
+        //        .ToListAsync(),
+        //    });
+        //}
+
+
+      

@@ -52,7 +52,15 @@
                         <h3 class="m-0">@ViewBag.MyTerm[i].Name</h3>
                     </div>
                     <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
-                                 @foreach (var item in Model.Take(6))
+                      @*    @foreach (var item in Model.Posts.Where(p => p.PostTerms.Where(pt => pt.Term.Name == Model.Terms.ElementAt(i).Name) == ))*@
+                                                    @foreach (var item in Model.Where( x => {
+                                foreach(var ter in x.PostTerms)
+                                {
+                                    if (ter.TermId == @ViewBag.MyTerm[i].TermId)
+                                        return true;
+                                }
+                                return false; 
+                            }).Take(6))
               
                 { 
                     <div class="position-relative" >
@@ -81,9 +89,16 @@
                      <h3 class="m-0">@ViewBag.MyTerm[i+1].Name</h3>
                     </div>
                     <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
-                          @foreach (var item in Model.Take(6))
-                       //  @foreach (var item in Model.Where(x=>x.PostTypeId==ViewBag.postTypes[i+1].PostTypeId).Take(4))
-              
+                     @*  // @foreach (var item in Model.Take(6))*@
+                            @foreach (var item in Model.Where( x => {
+                                foreach(var ter in x.PostTerms)
+                                {
+                                    if (ter.TermId == @ViewBag.MyTerm[i + 1].TermId)
+                                        return true;
+                                }
+                                return false; 
+                            }).Take(4))
+
                 { 
                     <div class="position-relative" >
                             <img class="img-fluid w-100"  src="https://localhost:44386/media/posts/@item.Image" style="object-fit: cover;">
