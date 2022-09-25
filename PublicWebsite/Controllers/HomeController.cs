@@ -20,29 +20,29 @@ namespace PublicWebsite.Controllers
             this.context = context;
         }
        
-        public async Task<IActionResult> Index()
-        {
-            var t = context.Terms.Where(x => x.TermId != null);
+        //public async Task<IActionResult> Index()
+        //{
+        //    var t = context.Terms.Where(x => x.TermId != null);
 
-            List<Term> terms = new List<Term>();
-            foreach (Term item in t)
-            {
-                int termId = item.TermId;
-                Term Trm = context.Terms.First(p => p.TermId == termId);
+        //    List<Term> terms = new List<Term>();
+        //    foreach (Term item in t)
+        //    {
+        //        int termId = item.TermId;
+        //        Term Trm = context.Terms.First(p => p.TermId == termId);
 
-                terms.Add(new Term
-                {
-                    TermId = Trm.TermId,
-                    Name = Trm.Name,
-                    Code = Trm.Code
+        //        terms.Add(new Term
+        //        {
+        //            TermId = Trm.TermId,
+        //            Name = Trm.Name,
+        //            Code = Trm.Code
 
-                });
-            }
-            ViewBag.Term = terms;
-            var postTypes = await context.PostTypes.ToListAsync();
-            ViewBag.postTypes = postTypes;
-            return View();
-        }
+        //        });
+        //    }
+        //    ViewBag.Term = terms;
+        //    var postTypes = await context.PostTypes.ToListAsync();
+        //    ViewBag.postTypes = postTypes;
+        //    return View();
+        //}
         public async Task<IActionResult> Messages()
         {
             var t = context.Terms.Where(x => x.TermId != null);
@@ -117,7 +117,7 @@ namespace PublicWebsite.Controllers
             {
                 context.Contacts.Add(model);
                 context.SaveChanges();
-                return RedirectToAction("Index");
+              //  return RedirectToAction("Contact");
             }
 
             return View("Contact", model);
