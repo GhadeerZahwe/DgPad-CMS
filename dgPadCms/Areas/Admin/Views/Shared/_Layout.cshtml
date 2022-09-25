@@ -349,16 +349,16 @@
                                     <div class="account-item clearfix js-item-menu">
                                         
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Ghadeer Zahwe</a>
+                                            <a class="js-acc-btn"  asp-area="Identity" asp-page="/Account/Manage/Index">@User.Identity.Name</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                               
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">Ghadeer Zahwe</a>
+                                                        <a asp-area="Identity" asp-page="/Account/Manage/Index">@User.Identity.Name</a>
                                                     </h5>
-                                                    <span class="email">ghadeer@gmail.com</span>
+                                    @*                <span class="email">ghadeer@gmail.com</span>*@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
