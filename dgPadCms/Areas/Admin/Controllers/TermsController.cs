@@ -104,7 +104,7 @@ namespace dgPadCms.Areas.Admin.Controllers
         // GET /admin/term/details/5
         public async Task<IActionResult> Details(int id)
         {
-            Term term = await context.Terms.Include(x => x.Taxonomy).FirstOrDefaultAsync(x => x.TaxonomyId == id);
+            Term term = await context.Terms.Include(x => x.Taxonomy).FirstOrDefaultAsync(x => x.TermId == id);
             if (term == null)
             {
                 return NotFound();
@@ -112,7 +112,7 @@ namespace dgPadCms.Areas.Admin.Controllers
 
             return View(term);
         }
-
+     
         // GET /admin/term/delete/5
         public async Task<IActionResult> Delete(int id)
         {
@@ -135,3 +135,4 @@ namespace dgPadCms.Areas.Admin.Controllers
     }
 }
     
+

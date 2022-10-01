@@ -86,9 +86,7 @@ namespace dgPadCms.Areas.Admin.Controllers
                 await post.ImageUpload.CopyToAsync(fs);
                 fs.Close();
             }
-
             post.Image = imageName;
-
             context.Add(post);
             await context.SaveChangesAsync();
 

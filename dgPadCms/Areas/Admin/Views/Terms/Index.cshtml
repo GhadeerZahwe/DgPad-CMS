@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = "Terms";
 }
-
-
 <h1>Terms</h1>
 <p>
     <a asp-action="Create">Create New</a>
@@ -15,7 +13,6 @@
             <th>
                 Name
             </th>
-       
             <th>
                 Taxonomy
             </th>
@@ -34,6 +31,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TermId">Edit</a> |
+                  <a asp-action="Details" asp-route-id="@item.TermId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.TermId">Delete</a>
             </td>
         </tr>
