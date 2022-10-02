@@ -43,29 +43,7 @@ namespace PublicWebsite.Controllers
         //    ViewBag.postTypes = postTypes;
         //    return View();
         //}
-        public async Task<IActionResult> Messages()
-        {
-            var t = context.Terms.Where(x => x.TermId != null);
-
-            List<Term> terms = new List<Term>();
-            foreach (Term item in t)
-            {
-                int termId = item.TermId;
-                Term Trm = context.Terms.First(p => p.TermId == termId);
-
-                terms.Add(new Term
-                {
-                    TermId = Trm.TermId,
-                    Name = Trm.Name,
-                    Code = Trm.Code
-
-                });
-            }
-            ViewBag.Term = terms;
-            var postTypes = await context.PostTypes.ToListAsync();
-            ViewBag.postTypes = postTypes;
-            return View(context.Contacts.ToList());
-        }
+       
 
         public async Task<IActionResult> Contact()
         {
@@ -90,6 +68,7 @@ namespace PublicWebsite.Controllers
             ViewBag.postTypes = postTypes;
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> SaveContactAsync(ContactUS model)
         {
@@ -124,29 +103,29 @@ namespace PublicWebsite.Controllers
         }
 
 
-        public async  Task<IActionResult> Privacy()
-        {
-            var t = context.Terms.Where(x => x.TermId != null);
+        //public async  Task<IActionResult> Privacy()
+        //{
+        //    var t = context.Terms.Where(x => x.TermId != null);
 
-            List<Term> terms = new List<Term>();
-            foreach (Term item in t)
-            {
-                int termId = item.TermId;
-                Term Trm = context.Terms.First(p => p.TermId == termId);
+        //    List<Term> terms = new List<Term>();
+        //    foreach (Term item in t)
+        //    {
+        //        int termId = item.TermId;
+        //        Term Trm = context.Terms.First(p => p.TermId == termId);
 
-                terms.Add(new Term
-                {
-                    TermId = Trm.TermId,
-                    Name = Trm.Name,
-                    Code = Trm.Code
+        //        terms.Add(new Term
+        //        {
+        //            TermId = Trm.TermId,
+        //            Name = Trm.Name,
+        //            Code = Trm.Code
 
-                });
-            }
-            ViewBag.Term = terms;
-            var postTypes = await context.PostTypes.ToListAsync();
-            ViewBag.postTypes = postTypes;
-            return View();
-        }
+        //        });
+        //    }
+        //    ViewBag.Term = terms;
+        //    var postTypes = await context.PostTypes.ToListAsync();
+        //    ViewBag.postTypes = postTypes;
+        //    return View();
+        //}
 
    
     }

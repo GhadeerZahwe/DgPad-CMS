@@ -19,7 +19,7 @@ namespace PublicWebsite.Controllers
         }
 
 
-        // GET /admin/posts
+        
         public async Task<IActionResult> Index()
         {
             var t = context.Terms.Where(x => x.TermId != null);
@@ -50,10 +50,12 @@ namespace PublicWebsite.Controllers
             return View(posts);
         }
 
-        // GET /admin/posts/details/5
+       
         public async Task<IActionResult> Details(int id)
         {
-            Post post = await context.Posts.Include(x => x.PostType).Include(x => x.PostTerms).FirstOrDefaultAsync(x => x.PostId == id);
+            Post post = await context.Posts.Include(x => x.PostType)
+                .Include(x => x.PostTerms)
+                .FirstOrDefaultAsync(x => x.PostId == id);
             if (post == null)
             {
                 return NotFound();
@@ -81,7 +83,7 @@ namespace PublicWebsite.Controllers
             return View(post);
         }
 
-        // GET /admin/posts/terms/5
+
         public async Task<IActionResult> Terms(int id)
         {
             var t = context.Terms.
@@ -102,7 +104,6 @@ namespace PublicWebsite.Controllers
                 });
             }
             ViewBag.Term = terms;
-
             var tt = context.Terms.
             Where(x => x.TermId == id);
 
