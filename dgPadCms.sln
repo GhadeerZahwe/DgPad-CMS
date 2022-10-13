@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dgPadCms", "dgPadCms\dgPadC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{B7434A5D-B8A7-409F-A7B7-6C852E128DC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicWebsite", "PublicWebsite\PublicWebsite.csproj", "{6C42C173-C2C3-443F-A969-D4B8E93170F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicWebsite", "PublicWebsite\PublicWebsite.csproj", "{6C42C173-C2C3-443F-A969-D4B8E93170F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

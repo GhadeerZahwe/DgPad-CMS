@@ -11,9 +11,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dgPadCms.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Editor, Admin")]
     [Area("Admin")]
     public class PostsController : Controller
     {
