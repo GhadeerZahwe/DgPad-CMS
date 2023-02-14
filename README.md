@@ -102,7 +102,6 @@ They can only read, no creations or updates are allowed.
                                           Screenshots
 ============================================================================================
 
-![1](https://user-images.githubusercontent.com/88279980/192155844-2ce7e512-9d04-416c-aa23-b1e421d47083.png)
 ![2](https://user-images.githubusercontent.com/88279980/192155855-de496f4a-276a-4f68-83db-5d647a779333.png)
 ![3](https://user-images.githubusercontent.com/88279980/192155869-756aeeda-750d-4e3d-9fa2-e972a7e6a86a.png)
 ![4](https://user-images.githubusercontent.com/88279980/192155873-a18acf33-0be9-4b83-801b-13be36ea2b5d.png)
@@ -115,9 +114,6 @@ They can only read, no creations or updates are allowed.
 ![11](https://user-images.githubusercontent.com/88279980/192155917-48347d3f-8a4a-4827-b081-ed1283c93f81.png)
 ![12](https://user-images.githubusercontent.com/88279980/192155924-e8fe46d1-2e5b-4c14-8bd9-f9d5c21b0821.png)
 ![13](https://user-images.githubusercontent.com/88279980/192155926-a6b53c61-f51d-4f8a-b036-158801c8f186.png)
-![14](https://user-images.githubusercontent.com/88279980/192155930-8afd348e-5d05-4d5e-8e77-e37d7663a936.png)
-![15](https://user-images.githubusercontent.com/88279980/192155932-817b98e8-5334-458e-a0eb-ef0918060b5a.png)
-![16](https://user-images.githubusercontent.com/88279980/192155938-b1342f82-fce1-4dbc-9912-786641e6d8c5.png)
 
 ============================================================================================
 
