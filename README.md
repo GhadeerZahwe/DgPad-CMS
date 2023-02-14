@@ -40,7 +40,6 @@ of a list as the following layout:
 ![image](https://user-images.githubusercontent.com/88279980/188483990-dc45cb5b-d3aa-4b8e-95ba-9ad58c1ce65f.png)
 ![image](https://user-images.githubusercontent.com/88279980/191241976-4375e946-36aa-464a-9286-37fdd799a5bf.png)
 ![image](https://user-images.githubusercontent.com/88279980/188484333-0187bd6b-3fc0-4bff-bf8b-2f697653585c.png)
-![image](https://user-images.githubusercontent.com/88279980/188484363-fd1f5a5b-4273-4fd5-9e5a-df6c484951e8.png)
 ![image](https://user-images.githubusercontent.com/88279980/191242151-b5ccb391-3542-49ef-98c3-1e15aa0caa49.png)
 ![image](https://user-images.githubusercontent.com/88279980/191242194-397d5728-1f10-4727-b2e8-3a5b6398f214.png)
 
